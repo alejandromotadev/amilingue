@@ -13,6 +13,8 @@ import 'package:amilingue/features/lessons/data/datasources/lesson_remote_dataso
 import 'package:amilingue/features/lessons/data/repository/lesson_repository_impl.dart';
 import 'package:amilingue/features/lessons/domain/repositories/lesson_repository.dart';
 import 'package:amilingue/features/lessons/domain/usecases/lesson_usecase.dart';
+import 'package:amilingue/features/profile/data/datasources.dart';
+import 'package:amilingue/features/profile/domain/repositories.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 List<RepositoryProvider> buildRepositories(){
@@ -32,6 +34,8 @@ List<RepositoryProvider> buildRepositories(){
 
     RepositoryProvider<LessonUseCase>(create: (context) => LessonUseCase(context.read()),),
     RepositoryProvider<LessonRepository>(create: (context) => LessonRepositoryImpl(lessonRemoteDataSource: lessonRemoteDataSource)),
+
+    RepositoryProvider<PersistentStorageRepository>(create: (context) => PersistentStorageImpl()),
 
   ];
 }

@@ -1,3 +1,5 @@
+import 'package:amilingue/Widgets/Navigation/presentation/navigation.dart';
+import 'package:amilingue/features/course_home/presentation/pages/home.dart';
 import 'package:flutter/material.dart';
 
 const List<String> list = <String>['One', 'Two', 'Three', 'Four'];
@@ -57,11 +59,21 @@ class _FormViewState extends State<FormView> {
                     ),
                     style: const TextStyle(color: Colors.deepPurple),
                     underline: Container(height: 0),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const NavigationPage(),
+                        ),
+                      );
+                    },
                     onChanged: (value) {
                       // This is called when the user selects an item.
-                      setState(() {
-                        dropdownValue = value!;
-                      });
+                      setState(
+                        () {
+                          dropdownValue = value!;
+                        },
+                      );
                     },
                     items: list.map<DropdownMenuItem>((value) {
                       return DropdownMenuItem(
