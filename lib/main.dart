@@ -1,4 +1,6 @@
 import 'package:amilingue/dependencies.dart';
+import 'package:amilingue/features/authentication/presentation/authentication_page.dart';
+import 'package:amilingue/features/authentication/presentation/cubit/Auth/auth_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,6 +23,7 @@ class MyApp extends StatelessWidget {
           //Aqui se inyectan solamente los cubit/blocs
           //ejemplo:
           //BlocProvider(create: (context) => AuthenticationCubit(context.read() #=="el context.read() es para leer PARAMETROS"==#  ))
+          BlocProvider(create: (context) => AuthenticationCubit()),
 
         ],
         child: MaterialApp(
@@ -29,25 +32,9 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
-          home: const MyHomePage(),
+          home: const AuthenticationView(),
         ),
       ),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-
-    return const Scaffold(
-      body: Center(child: Text("HomePage"),),
     );
   }
 }
