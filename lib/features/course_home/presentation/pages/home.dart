@@ -1,53 +1,168 @@
-import 'package:amilingue/features/course_details/presentation/pages/course_details.dart';
+import 'package:amilingue/Widgets/Categories/presentation/pages/category_box.dart';
+import 'package:amilingue/utils/data.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
-class HomeView extends StatelessWidget {
+final String nameUser = "Name User";
+
+class HomeView extends StatefulWidget {
   const HomeView({super.key});
 
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: const Color(0xffAE70EC),
-        body: ListView.builder(
-          itemCount: 5,
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 60),
-              child: Column(
+          backgroundColor: const Color(0xffAE70EC),
+          appBar: buildAppBar(),
+          body: buildBody()),
+    );
+  }
+}
+
+AppBar buildAppBar() {
+  return AppBar(
+    automaticallyImplyLeading: false,
+    forceMaterialTransparency: true,
+    elevation: 0,
+    title: Row(
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              nameUser,
+              style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500),
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            const Text(
+              "Welcome!",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600),
+            ),
+          ],
+        )
+      ],
+    ),
+  );
+}
+
+Widget buildBody() {
+  return SingleChildScrollView(
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        getCategories(),
+        const Padding(
+          padding: EdgeInsets.fromLTRB(15, 0, 15, 10),
+          child: Text(
+            "Check these courses",
+            style: TextStyle(
+                fontWeight: FontWeight.w600, fontSize: 22, color: Colors.white),
+          ),
+        ),
+        getFeatures(),
+      ],
+    ),
+  );
+}
+
+Widget getCategories() {
+  return SingleChildScrollView(
+    padding: const EdgeInsets.fromLTRB(15, 10, 0, 10),
+    scrollDirection: Axis.horizontal,
+    child: Row(
+      children: List.generate(
+        categories.length,
+        (index) => Padding(
+          padding: const EdgeInsets.only(right: 20),
+          child: CategoryBox(
+            data: categories[index],
+          ),
+        ),
+      ),
+    ),
+  );
+}
+
+Widget getFeatures() {
+  return CarouselSlider(
+    options: CarouselOptions(
+        height: 250, enlargeCenterPage: true, disableCenter: true),
+    items: [
+      Container(
+        width: 270,
+        padding: const EdgeInsets.all(10),
+        margin: const EdgeInsets.only(bottom: 5, top: 5),
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.black.withOpacity(0.2),
+                  spreadRadius: 1,
+                  blurRadius: 1,
+                  offset: const Offset(1, 6))
+            ]),
+        child: Stack(
+          children: [
+            Container(
+              width: double.infinity,
+              height: 180,
+              child: Container(
+                decoration: BoxDecoration(
+                    color: Colors.pink,
+                    borderRadius: BorderRadius.circular(15)),
+              ),
+            ),
+            Positioned(
+              top: 10,
+              left: 10,
+              child: Container(
+                padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(15)),
+                child: Text(
+                  courses[0]["name"],
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                      color: Colors.black, fontWeight: FontWeight.w500),
+                ),
+              ),
+            ),
+            Positioned(
+              top: 190,
+              left: 10,
+              child: Row(
                 children: [
-                  Text("curso ${index + 1}"),
-                  InkWell(
-                    onTap: (){
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const CourseView(),
-                        ),
-                      );
-                    },
-                    child: Container(
-                      height: 150,
-                      width: 300,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.2),
-                              spreadRadius: 1,
-                              offset: const Offset(0, 4),
-                            )
-                          ]),
-                      child: const Center(child: Text("hi")),
-                    ),
+                  const Icon((Icons.play_circle_outline)),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  Text(
+                    courses[0]["lessons"],
+                    style: TextStyle(
+                        color: Colors.black, fontWeight: FontWeight.w500),
                   ),
                 ],
               ),
-            );
-          },
+            ),
+          ],
         ),
-      ),
-    );
-  }
+      )
+    ],
+  );
 }
