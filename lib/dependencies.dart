@@ -18,24 +18,25 @@ import 'package:amilingue/features/profile/domain/repositories.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 List<RepositoryProvider> buildRepositories(){
-  final UserRemoteDataSource userRemoteDataSource = UserRemoteDataSourceImpl();
+  final UserRemoteDataSource userRemoteDataSourceImpl = UserRemoteDataSourceImpl();
   final ExcersiceRemoteDataSource excersiceRemoteDataSource = ExcersiceRemoteDataSourceImpl();
   final LessonRemoteDataSource lessonRemoteDataSource = LessonRemoteDataSourceImpl();
+
   return[
-    //aqui inyectaremos los casos de uso y  repositorios y sus implementaciones
-    // EJEMPLO:
-    // RepositoryProvider<LoginUseCase>(create: (context)=> LoginUseCase(context.read() #"el context.read() es para que lea los parametros"# ))
-    // RepositoryProvider<MyThingRepository>(create: (context)=> MyThingImpl())
-    RepositoryProvider<UserUseCase>(create: (context) => UserUseCase(context.read()),),
-    RepositoryProvider<UserRepository>(create: (context) => UserRepositoryImpl(userRemoteDataSource: userRemoteDataSource )),
+    RepositoryProvider<UserRemoteDataSource>(create: (context)=> UserRemoteDataSourceImpl()),
+    RepositoryProvider<UserRepository>(create: (context) => UserRepositoryImpl(userRemoteDataSource: userRemoteDataSourceImpl )),
 
-    RepositoryProvider<ExcersiceUseCase>(create: (context) => ExcersiceUseCase(context.read()),),
-    RepositoryProvider<ExcersiceRepository>(create: (context) => ExcersiceRepositoryImpl(excersiceRemoteDataSource: excersiceRemoteDataSource)),
-
-    RepositoryProvider<LessonUseCase>(create: (context) => LessonUseCase(context.read()),),
     RepositoryProvider<LessonRepository>(create: (context) => LessonRepositoryImpl(lessonRemoteDataSource: lessonRemoteDataSource)),
-
+    RepositoryProvider<ExcersiceRepository>(create: (context) => ExcersiceRepositoryImpl(excersiceRemoteDataSource: excersiceRemoteDataSource)),
     RepositoryProvider<PersistentStorageRepository>(create: (context) => PersistentStorageImpl()),
+
+
+
+    RepositoryProvider<UserUseCase>(create: (context) => UserUseCase(context.read())),
+    RepositoryProvider<LessonUseCase>(create: (context) => LessonUseCase(context.read()),),
+    RepositoryProvider<ExcersiceUseCase>(create: (context) => ExcersiceUseCase(context.read()),),
+
+
 
   ];
 }

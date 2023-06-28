@@ -20,7 +20,8 @@ class NavigationPage extends StatelessWidget {
       bottomNavigationBar: BlocBuilder<NavigationCubit, int>(
         builder: (context, state) {
           return BottomNavigationBar(
-            enableFeedback: false,
+            backgroundColor: Colors.white70,
+            enableFeedback: true,
             currentIndex: context.read<NavigationCubit>().state,
             onTap: (index) {
               context.read<NavigationCubit>().changePage(index);

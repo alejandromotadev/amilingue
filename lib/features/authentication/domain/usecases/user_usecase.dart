@@ -2,8 +2,6 @@ import 'package:amilingue/features/authentication/domain/repositories/user_repos
 
 
 class UserUseCase{
-  UserUseCase(this.userRepository,);
   final UserRepository userRepository;
-
-
+  UserUseCase(this.userRepository,);
 }
