@@ -1,5 +1,6 @@
 import 'package:amilingue/features/authentication/presentation/authentication_page.dart';
 import 'package:amilingue/features/profile/presentation/cubit/profile_cubit.dart';
+import 'package:amilingue/utils/contants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -11,7 +12,7 @@ class ProfileView extends StatelessWidget {
     final user = "user";
     final image = "";
     return Scaffold(
-      backgroundColor: const Color(0xffAE70EC),
+      backgroundColor: primaryBackground,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,

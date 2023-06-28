@@ -1,3 +1,4 @@
+import 'package:amilingue/utils/contants.dart';
 import 'package:amilingue/utils/data.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ class LessonView extends StatelessWidget {
         ),
         forceMaterialTransparency: true,
       ),
-      backgroundColor: const Color(0xffAE70EC),
+      backgroundColor: primaryBackground,
       body: Center(
         child: getLessons(),
       ),

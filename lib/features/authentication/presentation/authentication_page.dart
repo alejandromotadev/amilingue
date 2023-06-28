@@ -1,6 +1,8 @@
 import 'package:amilingue/Widgets/Navigation/presentation/navigation.dart';
+import 'package:amilingue/features/authentication/domain/entities/user.dart';
 import 'package:amilingue/features/authentication/presentation/cubit/Auth/auth_cubit.dart';
 import 'package:amilingue/features/authentication/presentation/cubit/Auth/auth_state.dart';
+import 'package:amilingue/utils/contants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -26,7 +28,7 @@ class _AuthenticationViewState extends State<AuthenticationView> {
       builder: (context, snapshot) {
         return SafeArea(
           child: Scaffold(
-            backgroundColor: const Color(0xffAE70EC),
+            backgroundColor: primaryBackground,
             body: Center(
               child: Column(
                 children: [
@@ -36,14 +38,23 @@ class _AuthenticationViewState extends State<AuthenticationView> {
                     child: Center(
                       child: Text(
                         "AMILINGUE",
-                        style: TextStyle(color: Colors.white, fontSize: 38),
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 38,
+                            fontWeight: FontWeight.w500,
+                            shadows: [
+                              Shadow(
+                                  color: Colors.black26,
+                                  blurRadius: 10,
+                                  offset: Offset(0, 5))
+                            ]),
                       ),
                     ),
                   ),
                   Flexible(
                     fit: FlexFit.loose,
-                    flex: 3,
-                    child: Card(
+                    flex: 4,
+                    child: Container(
                       color: const Color(0xfff5f5f5),
                       child: SizedBox(
                         height: double.maxFinite,
@@ -59,34 +70,117 @@ class _AuthenticationViewState extends State<AuthenticationView> {
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    TextField(
-                                      controller: emailController,
-                                      decoration: const InputDecoration(
-                                          hintText: ('email'),
-                                          prefixIcon: Icon(Icons.email,
-                                              color: Colors.black)),
-                                      textInputAction: TextInputAction.next,
+                                    Container(
+                                      width: 300,
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color:
+                                                  Colors.black.withOpacity(0.2),
+                                              offset: Offset(0, 2),
+                                              blurRadius: 1,
+                                              spreadRadius: 1,
+                                            )
+                                          ]),
+                                      child: TextField(
+                                        controller: emailController,
+                                        decoration: const InputDecoration(
+                                            border: InputBorder.none,
+                                            hintText: ('email'),
+                                            prefixIcon: Icon(Icons.email,
+                                                color: Colors.purple)),
+                                        textInputAction: TextInputAction.next,
+                                      ),
                                     ),
                                     const SizedBox(
                                       height: 30,
                                     ),
-                                    TextField(
-                                      controller: passwordController,
-                                      decoration: const InputDecoration(
-                                          hintText: ('password'),
-                                          prefixIcon: Icon(Icons.lock,
-                                              color: Colors.black)),
-                                      textInputAction: TextInputAction.done,
+                                    Container(
+                                      width: 300,
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color:
+                                                  Colors.black.withOpacity(0.2),
+                                              offset: Offset(0, 2),
+                                              blurRadius: 1,
+                                              spreadRadius: 1,
+                                            )
+                                          ]),
+                                      child: TextField(
+                                        controller: passwordController,
+                                        decoration: const InputDecoration(
+                                            border: InputBorder.none,
+                                            hintText: ('password'),
+                                            prefixIcon: Icon(Icons.lock,
+                                                color: Colors.purple)),
+                                        textInputAction: TextInputAction.done,
+                                      ),
                                     ),
                                     const SizedBox(
                                       height: 50,
                                     ),
-                                    ElevatedButton(
-                                        onPressed: () => context
-                                            .read<AuthenticationCubit>()
-                                            .loginCubit(emailController.text,
-                                                passwordController.text),
-                                        child: Text("sign in"))
+                                    Container(
+                                      width: 300,
+                                      height: 60,
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color:
+                                                  Colors.black.withOpacity(0.2),
+                                              spreadRadius: 1,
+                                              offset: Offset(0, 4),
+                                              blurRadius: 1,
+                                            )
+                                          ]),
+                                      child: ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                            backgroundColor: Colors.white,
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10))),
+                                        onPressed: () {
+                                          if (emailController.text.isNotEmpty ||
+                                              passwordController
+                                                  .text.isNotEmpty) {
+                                            context
+                                                .read<AuthenticationCubit>()
+                                                .loginCubit(
+                                                    emailController.text,
+                                                    passwordController.text);
+                                          } else {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              const SnackBar(
+                                                backgroundColor: Colors.red,
+                                                content: Text(
+                                                  'Campos vacios',
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontSize: 18),
+                                                ),
+                                              ),
+                                            );
+                                          }
+                                        },
+                                        child: const Text(
+                                          "sign in",
+                                          style: TextStyle(color: Colors.black),
+                                        ),
+                                      ),
+                                    )
                                   ],
                                 ),
                               ),
