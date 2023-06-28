@@ -12,7 +12,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState>{
       await _userUseCase.userRepository.login(email, password);
       emit(AuthenticationState.authenticated);
     }catch(e){
-      print(e);
+      print("error authentication cubit ===> ${e}");
     }
 
   }

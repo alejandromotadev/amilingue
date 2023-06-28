@@ -14,7 +14,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
     response = await dio.post(api, data: data);
     if (response.statusCode == 200) {
       final body = response.data['data'];
-      return UserModel(email: body['email'], name: body['name'], password: '');
+      return UserModel(email: body['email'], password: body["password"]);
     } else {
       return null;
     }
