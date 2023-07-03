@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:amilingue/Widgets/Navigation/presentation/navigation.dart';
 import 'package:amilingue/features/authentication/domain/entities/user.dart';
 import 'package:amilingue/features/authentication/presentation/cubit/Auth/auth_cubit.dart';
@@ -5,6 +7,7 @@ import 'package:amilingue/features/authentication/presentation/cubit/Auth/auth_s
 import 'package:amilingue/utils/contants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthenticationView extends StatefulWidget {
   const AuthenticationView({super.key});
@@ -14,8 +17,20 @@ class AuthenticationView extends StatefulWidget {
 }
 
 class _AuthenticationViewState extends State<AuthenticationView> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  setUserData() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+     user = jsonDecode(sharedPreferences.getString('user')!);
+  }
+
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  dynamic user;
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AuthenticationCubit, AuthenticationState>(
@@ -55,7 +70,7 @@ class _AuthenticationViewState extends State<AuthenticationView> {
                     fit: FlexFit.loose,
                     flex: 4,
                     child: Container(
-                      color: const Color(0xfff5f5f5),
+                      color: secondaryBackground,
                       child: SizedBox(
                         height: double.maxFinite,
                         width: double.maxFinite,
@@ -73,7 +88,7 @@ class _AuthenticationViewState extends State<AuthenticationView> {
                                     Container(
                                       width: 300,
                                       decoration: BoxDecoration(
-                                          color: Colors.white,
+                                          color: secondaryBackground,
                                           borderRadius:
                                               BorderRadius.circular(15),
                                           boxShadow: [
@@ -91,7 +106,7 @@ class _AuthenticationViewState extends State<AuthenticationView> {
                                             border: InputBorder.none,
                                             hintText: ('email'),
                                             prefixIcon: Icon(Icons.email,
-                                                color: Colors.purple)),
+                                                color: primaryBackground)),
                                         textInputAction: TextInputAction.next,
                                       ),
                                     ),
@@ -101,7 +116,7 @@ class _AuthenticationViewState extends State<AuthenticationView> {
                                     Container(
                                       width: 300,
                                       decoration: BoxDecoration(
-                                          color: Colors.white,
+                                          color: secondaryBackground,
                                           borderRadius:
                                               BorderRadius.circular(15),
                                           boxShadow: [
@@ -119,7 +134,7 @@ class _AuthenticationViewState extends State<AuthenticationView> {
                                             border: InputBorder.none,
                                             hintText: ('password'),
                                             prefixIcon: Icon(Icons.lock,
-                                                color: Colors.purple)),
+                                                color: primaryBackground)),
                                         textInputAction: TextInputAction.done,
                                       ),
                                     ),
@@ -144,19 +159,18 @@ class _AuthenticationViewState extends State<AuthenticationView> {
                                           ]),
                                       child: ElevatedButton(
                                         style: ElevatedButton.styleFrom(
-                                            backgroundColor: Colors.white,
+                                            backgroundColor: secondaryBackground,
                                             shape: RoundedRectangleBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(10))),
                                         onPressed: () {
-                                          if (emailController.text.isNotEmpty ||
+
+                                          Navigator.of(context).pushReplacement(
+                                              MaterialPageRoute(builder: (_) => const NavigationPage()));
+                                          /*if (emailController.text.isNotEmpty ||
                                               passwordController
                                                   .text.isNotEmpty) {
-                                            context
-                                                .read<AuthenticationCubit>()
-                                                .loginCubit(
-                                                    emailController.text,
-                                                    passwordController.text);
+                                            context.read<AuthenticationCubit>().loginCubit(emailController.text, passwordController.text);
                                           } else {
                                             ScaffoldMessenger.of(context)
                                                 .showSnackBar(
@@ -173,11 +187,11 @@ class _AuthenticationViewState extends State<AuthenticationView> {
                                                 ),
                                               ),
                                             );
-                                          }
+                                          }*/
                                         },
                                         child: const Text(
                                           "sign in",
-                                          style: TextStyle(color: Colors.black),
+                                          style: TextStyle(color: primaryTextColor),
                                         ),
                                       ),
                                     )

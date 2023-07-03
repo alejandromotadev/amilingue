@@ -1,6 +1,7 @@
 import 'package:amilingue/Widgets/Navigation/cubit/navigation_cubit.dart';
 import 'package:amilingue/features/course_home/presentation/pages/home.dart';
 import 'package:amilingue/features/profile/presentation/page/profile_view.dart';
+import 'package:amilingue/utils/contants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -20,7 +21,7 @@ class NavigationPage extends StatelessWidget {
       bottomNavigationBar: BlocBuilder<NavigationCubit, int>(
         builder: (context, state) {
           return BottomNavigationBar(
-            backgroundColor: Colors.white70,
+            backgroundColor: secondaryBackground,
             enableFeedback: true,
             currentIndex: context.read<NavigationCubit>().state,
             onTap: (index) {
@@ -28,14 +29,19 @@ class NavigationPage extends StatelessWidget {
             },
             items: const [
               BottomNavigationBarItem(
-                icon: Icon(Icons.home, color: Colors.grey,),
+                icon: Icon(Icons.home, color: primaryTextColor,),
                 label: "home",
-                activeIcon: Icon(Icons.home),
+                activeIcon: Icon(Icons.home, color: primaryBackground,),
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.person, color: Colors.grey,),
+                icon: Icon(Icons.task, color: primaryTextColor,),
+                label: "my courses",
+                activeIcon: Icon(Icons.task, color: primaryBackground,),
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.person, color: primaryTextColor,),
                 label: "profile",
-                activeIcon: Icon(Icons.person),
+                activeIcon: Icon(Icons.person, color: primaryBackground,),
               )
             ],
           );

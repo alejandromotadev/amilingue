@@ -1,4 +1,6 @@
+import 'package:amilingue/Widgets/Categories/presentation/pages/category_box.dart';
 import 'package:amilingue/features/lessons/presentation/pages/lesson_course.dart';
+import 'package:amilingue/utils/contants.dart';
 import 'package:amilingue/utils/data.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +21,7 @@ class _CourseViewState extends State<CourseView> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          backgroundColor: const Color(0xffAE70EC),
+          backgroundColor: primaryBackground,
           appBar: buildAppBar(),
           body: buildBody()),
     );
@@ -34,7 +36,9 @@ class _CourseViewState extends State<CourseView> {
           Text(
             courses[0]["title"],
             style: const TextStyle(
-                color: Colors.white, fontSize: 18, fontWeight: FontWeight.w600),
+                color: secondaryBackground,
+                fontSize: 18,
+                fontWeight: FontWeight.w600),
           ),
         ],
       ),
@@ -43,57 +47,143 @@ class _CourseViewState extends State<CourseView> {
 
   Widget buildBody() {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        getSlides(),
-      ],
-    );
-  }
-
-  Widget getSlides() {
-    return Column(
-      children: [
-        CarouselSlider(
-          options: CarouselOptions(height: 250.0),
-          carouselController: buttonCarouselController,
-          items: ["lessons","exercises", "videos", "test", "request meeting"].map((index) {
-            return Builder(
-              builder: (BuildContext context) {
-                return InkWell(
-                  onTap: (){
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const LessonView(),
-                        ));
-                  },
-                  child: Container(
-                      width: MediaQuery.of(context).size.width,
-                      margin: EdgeInsets.symmetric(horizontal: 5.0),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                        borderRadius: BorderRadius.circular(10)
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(index, style: TextStyle(fontSize: 16.0),),
-                        ],
-                      )
-                  ),
-                );
-              },
-            );
-          }).toList(),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+          child: Row(
+            children: [
+              Container(
+                  padding: const EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                      color: secondaryBackground,
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.black.withOpacity(0.2),
+                            spreadRadius: 1,
+                            blurRadius: 1,
+                            offset: const Offset(0, 3))
+                      ]),
+                  child: categories[1]["icon"]
+              ),
+              const SizedBox(width: 50),
+              Text(
+                courses[0]["title"],
+                style: const TextStyle(
+                    color: secondaryBackground,
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    shadows: [
+                      Shadow(
+                          color: Colors.black26,
+                          blurRadius: 10,
+                          offset: Offset(0, 5))
+                    ]),
+              )
+            ],
+          ),
         ),
-        ElevatedButton(
-          onPressed: () => buttonCarouselController.nextPage(
-              duration: Duration(milliseconds: 300), curve: Curves.linear),
-          child: const Icon(Icons.navigate_next)
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+          child: Text(
+            courses[4]["description"],
+            style: const TextStyle(
+                color: secondaryBackground,
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+            ),
+            textAlign: TextAlign.justify,
+          ),
+        ),
+        Container(
+          width: 320,
+          height: 60,
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius:
+              BorderRadius.circular(15),
+              boxShadow: [
+                BoxShadow(
+                  color:
+                  Colors.black.withOpacity(0.3),
+                  spreadRadius: 1,
+                  offset: const Offset(0, 5),
+                  blurRadius: 1,
+                )
+              ]),
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                backgroundColor: secondaryBackground,
+                shape: RoundedRectangleBorder(
+                    borderRadius:
+                    BorderRadius.circular(10))),
+            onPressed: () { },
+            child: const Text(
+              "Study",
+              style: TextStyle(color: primaryTextColor, fontSize: 20),
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Column(
+                children: [
+                  const Text("CATEGORIES", style: TextStyle(color: primaryTextColor, fontWeight: FontWeight.w600, fontSize: 16),),
+                  Text(categories[1]["name"],  style: const TextStyle(color: secondaryBackground),)
+                ],
+              ),
+              Column(
+                children: [
+                  const Text("RELATED COURSES", style: TextStyle(color: primaryTextColor, fontWeight: FontWeight.w600, fontSize: 16)),
+                  Text(courses[1]["title"], style: const TextStyle(color: secondaryBackground),)
+
+                ],
+              )
+            ],
+          ),
+        ),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          child: Row(
+            children: [
+              Text("You'll see",
+                style: TextStyle(
+                    color: secondaryBackground,
+                    fontSize: 24,
+                    fontWeight: FontWeight.w600,
+                    shadows: [
+                      Shadow(
+                          color: Colors.black26,
+                          blurRadius: 10,
+                          offset: Offset(0, 5))
+                    ],),
+              ),
+            ],
+          ),
+        ),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          child: Row(
+            children: [
+              Column(
+                children: [
+                  Text("Lesson 1", style: TextStyle(color: secondaryBackground, fontSize: 16, fontWeight: FontWeight.w500)),
+                  Text("Lesson 1", style: TextStyle(color: secondaryBackground, fontSize: 16, fontWeight: FontWeight.w500)),
+                  Text("Lesson 1", style: TextStyle(color: secondaryBackground, fontSize: 16, fontWeight: FontWeight.w500)),
+                  Text("Lesson 1", style: TextStyle(color: secondaryBackground, fontSize: 16, fontWeight: FontWeight.w500)),
+
+
+
+                ],
+              ),
+            ],
+          ),
         )
+
       ],
     );
-
   }
 }

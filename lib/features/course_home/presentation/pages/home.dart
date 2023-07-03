@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:amilingue/Widgets/Categories/presentation/pages/category_box.dart';
 import 'package:amilingue/features/authentication/data/models/auth_models.dart';
 import 'package:amilingue/features/authentication/domain/entities/user.dart';
@@ -6,6 +8,7 @@ import 'package:amilingue/utils/contants.dart';
 import 'package:amilingue/utils/data.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final String nameUser = "Name User";
 
@@ -17,7 +20,21 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  final UserEntity userEntity = UserModel(email: "email", password: "password", name: "name", user_name: "user_name");
+  dynamic user;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    setUserData();
+    super.initState();
+  }
+
+  setUserData() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    setState(() {
+      user = jsonDecode(sharedPreferences.getString('user')!);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,11 +57,17 @@ class _HomeViewState extends State<HomeView> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                userEntity.user_name,
+                user == null ? '' : user["name"],
                 style: const TextStyle(
-                    color: Colors.white,
+                    color: secondaryBackground,
                     fontSize: 14,
-                    fontWeight: FontWeight.w500),
+                    fontWeight: FontWeight.w500,
+                    shadows: [
+                      Shadow(
+                          color: Colors.black26,
+                          blurRadius: 10,
+                          offset: Offset(0, 5))
+                    ]),
               ),
               const SizedBox(
                 height: 5,
@@ -52,9 +75,15 @@ class _HomeViewState extends State<HomeView> {
               const Text(
                 "Welcome!",
                 style: TextStyle(
-                    color: Colors.white,
+                    color: secondaryBackground,
                     fontSize: 18,
-                    fontWeight: FontWeight.w600),
+                    fontWeight: FontWeight.w600,
+                    shadows: [
+                      Shadow(
+                          color: Colors.black26,
+                          blurRadius: 10,
+                          offset: Offset(0, 5))
+                    ]),
               ),
             ],
           )
@@ -69,6 +98,7 @@ class _HomeViewState extends State<HomeView> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           getCategories(),
+          const SizedBox(height: 20),
           const Padding(
             padding: EdgeInsets.fromLTRB(15, 0, 15, 10),
             child: Text(
@@ -76,8 +106,17 @@ class _HomeViewState extends State<HomeView> {
               style: TextStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: 22,
-                  color: Colors.white),
+                  color: secondaryBackground,
+                  shadows: [
+                    Shadow(
+                        color: Colors.black26,
+                        blurRadius: 10,
+                        offset: Offset(0, 5))
+                  ]),
             ),
+          ),
+          const SizedBox(
+            height: 10,
           ),
           getCourses(),
         ],
@@ -106,7 +145,7 @@ class _HomeViewState extends State<HomeView> {
   Widget getCourses() {
     return CarouselSlider(
         options: CarouselOptions(
-            height: 250, enlargeCenterPage: true, disableCenter: true),
+            height: 190, enlargeCenterPage: true, disableCenter: true),
         items: courses.map((index) {
           return Builder(
             builder: (BuildContext context) {
@@ -118,11 +157,11 @@ class _HomeViewState extends State<HomeView> {
                           builder: (context) => const CourseView()));
                 },
                 child: Container(
-                  width: 270,
+                  width: 280,
                   padding: const EdgeInsets.all(10),
                   margin: const EdgeInsets.only(bottom: 5, top: 5),
                   decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: secondaryBackground,
                       borderRadius: BorderRadius.circular(20),
                       boxShadow: [
                         BoxShadow(
@@ -138,7 +177,6 @@ class _HomeViewState extends State<HomeView> {
                         height: 180,
                         child: Container(
                           decoration: BoxDecoration(
-                              color: Colors.pink,
                               borderRadius: BorderRadius.circular(15)),
                         ),
                       ),
@@ -146,45 +184,50 @@ class _HomeViewState extends State<HomeView> {
                         top: 10,
                         left: 10,
                         child: Container(
+                          width: 150,
+                          height: 50,
                           padding: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(15)),
-                          child: Text(
-                            index["title"],
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.w500),
+                              color: secondaryBackground,
+                              borderRadius: BorderRadius.circular(15),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Colors.black.withOpacity(0.2),
+                                    spreadRadius: 1,
+                                    blurRadius: 1,
+                                    offset: const Offset(1, 4))
+                              ]),
+                          child: Center(
+                            child: Text(
+                              index["title"],
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                  color: primaryTextColor,
+                                  fontWeight: FontWeight.w500),
+                            ),
                           ),
                         ),
                       ),
                       Positioned(
-                        top: 190,
+                        top: 130,
                         left: 10,
                         child: Row(
                           children: [
                             const Icon((Icons.play_circle_outline)),
-                            const SizedBox(
-                              width: 5,
-                            ),
+                            const SizedBox(width: 5),
                             Text(
                               index["lessons"],
                               style: const TextStyle(
-                                  color: Colors.black,
+                                  color: primaryTextColor,
                                   fontWeight: FontWeight.w500),
                             ),
-                            const SizedBox(
-                              width: 15,
-                            ),
+                            const SizedBox(width: 10),
                             Text(
                               index["description"],
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(
-                                  color: Colors.grey,
-                                  fontWeight: FontWeight.w500),
+                              style: const TextStyle(color: primaryTextColor),
                             ),
                           ],
                         ),

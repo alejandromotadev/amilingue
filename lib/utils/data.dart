@@ -1,15 +1,16 @@
+import 'package:amilingue/utils/contants.dart';
 import 'package:flutter/material.dart';
 
 double sizeIcon = 40;
 List categories = [
-  {"name": "All", "icon": Icon(Icons.category, size: sizeIcon)},
-  {"name": "Tech", "icon": Icon(Icons.computer, size: sizeIcon)},
-  {"name": "Medicine", "icon": Icon(Icons.medical_information, size: sizeIcon)},
-  {"name": "Law", "icon": Icon(Icons.document_scanner, size: sizeIcon)},
-  {"name": "Psycho", "icon": Icon(Icons.healing, size: sizeIcon)},
-  {"name": "Music", "icon": Icon(Icons.music_note, size: sizeIcon)},
-  {"name": "Art", "icon": Icon(Icons.format_paint, size: sizeIcon)},
-  {"name": "Psycho", "icon": Icon(Icons.healing, size: sizeIcon)},
+  {"name": "All", "icon": Icon(Icons.category, size: sizeIcon, color: primaryTextColor,)},
+  {"name": "Tech", "icon": Icon(Icons.computer, size: sizeIcon, color: primaryTextColor,)},
+  {"name": "Medicine", "icon": Icon(Icons.medical_information, size: sizeIcon, color: primaryTextColor,)},
+  {"name": "Law", "icon": Icon(Icons.document_scanner, size: sizeIcon, color: primaryTextColor,)},
+  {"name": "Psycho", "icon": Icon(Icons.healing, size: sizeIcon, color: primaryTextColor,)},
+  {"name": "Music", "icon": Icon(Icons.music_note, size: sizeIcon, color: primaryTextColor,)},
+  {"name": "Art", "icon": Icon(Icons.format_paint, size: sizeIcon, color: primaryTextColor,)},
+  {"name": "Psycho", "icon": Icon(Icons.healing, size: sizeIcon, color: primaryTextColor,)},
 ];
 
 List courses = [

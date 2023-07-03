@@ -1,3 +1,4 @@
+import 'package:amilingue/features/authentication/domain/entities/user.dart';
 import 'package:amilingue/features/authentication/domain/usecases/user_usecase.dart';
 import 'package:amilingue/features/authentication/presentation/cubit/Auth/auth_state.dart';
 import 'package:bloc/bloc.dart';
@@ -6,11 +7,12 @@ class AuthenticationCubit extends Cubit<AuthenticationState>{
   AuthenticationCubit(this._userUseCase) : super(AuthenticationState.none);
   final UserUseCase _userUseCase;
 
-  Future<void>loginCubit(String email, String password)async{
+  Future<UserEntity?>loginCubit(String email, String password)async{
     print("================login cubit===============");
     try{
-      await _userUseCase.userRepository.login(email, password);
+      final user = await _userUseCase.userRepository.login(email, password);
       emit(AuthenticationState.authenticated);
+      return user;
     }catch(e){
       print("error authentication cubit ===> ${e}");
     }
