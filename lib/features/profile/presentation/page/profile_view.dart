@@ -1,16 +1,39 @@
+import 'dart:convert';
+
 import 'package:amilingue/features/authentication/presentation/authentication_page.dart';
 import 'package:amilingue/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:amilingue/utils/contants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class ProfileView extends StatelessWidget {
+class ProfileView extends StatefulWidget {
   const ProfileView({Key? key}) : super(key: key);
 
   @override
+  State<ProfileView> createState() => _ProfileViewState();
+}
+
+class _ProfileViewState extends State<ProfileView> {
+
+  dynamic user;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    setUserData();
+    super.initState();
+  }
+
+  setUserData() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    setState(() {
+      user = jsonDecode(sharedPreferences.getString('user')!);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final user = "user";
-    final image = "";
     return Scaffold(
       backgroundColor: primaryBackground,
       body: Center(
@@ -27,7 +50,7 @@ class ProfileView extends StatelessWidget {
                         BoxShadow(
                           color: Colors.black.withOpacity(0.2),
                           spreadRadius: 1,
-                          offset: const Offset(0, 5),
+                          offset: const Offset(0, 4),
                         )
                       ]),
                   child: const CircleAvatar(
@@ -35,8 +58,7 @@ class ProfileView extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 10),
-                Text(user ?? ""),
-                Text("curso")
+                Text(user == null ? 'place' : user["name"]),
               ],
             ),
             BlocListener<SettingsLogoutCubit, void>(
@@ -45,13 +67,7 @@ class ProfileView extends StatelessWidget {
                 height: 50,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.2),
-                        spreadRadius: 1,
-                        offset: const Offset(0, 3),
-                      )
-                    ]),
+                    ),
                 child: ElevatedButton(
                   onPressed: () {
                     context.read<SettingsLogoutCubit>().logout();

@@ -14,7 +14,7 @@ class CategoryBox extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(5),
           decoration: BoxDecoration(
-              color: secondaryBackground,
+              color: buttonColor,
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(

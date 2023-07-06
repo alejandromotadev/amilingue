@@ -3,14 +3,70 @@ import 'package:flutter/material.dart';
 
 double sizeIcon = 30;
 List categories = [
-  {"name": "All", "icon": Icon(Icons.category, size: sizeIcon, color: primaryTextColor,)},
-  {"name": "Tech", "icon": Icon(Icons.computer, size: sizeIcon, color: primaryTextColor,)},
-  {"name": "Medicine", "icon": Icon(Icons.medical_information, size: sizeIcon, color: primaryTextColor,)},
-  {"name": "Law", "icon": Icon(Icons.document_scanner, size: sizeIcon, color: primaryTextColor,)},
-  {"name": "Psycho", "icon": Icon(Icons.healing, size: sizeIcon, color: primaryTextColor,)},
-  {"name": "Music", "icon": Icon(Icons.music_note, size: sizeIcon, color: primaryTextColor,)},
-  {"name": "Art", "icon": Icon(Icons.format_paint, size: sizeIcon, color: primaryTextColor,)},
-  {"name": "Psycho", "icon": Icon(Icons.healing, size: sizeIcon, color: primaryTextColor,)},
+  {
+    "name": "All",
+    "icon": Icon(
+      Icons.category,
+      size: sizeIcon,
+      color: secondaryBackground,
+    )
+  },
+  {
+    "name": "Tech",
+    "icon": Icon(
+      Icons.computer,
+      size: sizeIcon,
+      color: secondaryBackground,
+    )
+  },
+  {
+    "name": "Medicine",
+    "icon": Icon(
+      Icons.medical_information,
+      size: sizeIcon,
+      color: secondaryBackground,
+    )
+  },
+  {
+    "name": "Law",
+    "icon": Icon(
+      Icons.document_scanner,
+      size: sizeIcon,
+      color: secondaryBackground,
+    )
+  },
+  {
+    "name": "Psycho",
+    "icon": Icon(
+      Icons.healing,
+      size: sizeIcon,
+      color: secondaryBackground,
+    )
+  },
+  {
+    "name": "Music",
+    "icon": Icon(
+      Icons.music_note,
+      size: sizeIcon,
+      color: secondaryBackground,
+    )
+  },
+  {
+    "name": "Art",
+    "icon": Icon(
+      Icons.format_paint,
+      size: sizeIcon,
+      color: secondaryBackground,
+    )
+  },
+  {
+    "name": "Psycho",
+    "icon": Icon(
+      Icons.healing,
+      size: sizeIcon,
+      color: secondaryBackground,
+    )
+  },
 ];
 
 List courses = [
@@ -22,7 +78,6 @@ List courses = [
     "topics_ids": [],
     "exercises_ids": [],
     "tests_ids": [],
-
   },
   {
     "title": "Laws and stuff",
@@ -36,7 +91,8 @@ List courses = [
   {
     "title": "HighSchool teacher",
     "lessons": "6 lessons",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pulvinar, urna vel facilisis malesuada, tellus magna auctor dui, a feugiat nulla turpis ut est. Donec elementum, elit eu vulputate cursus, lectus nisi tempor leo, in dignissim orci felis quis dui. ",
+    "description":
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pulvinar, urna vel facilisis malesuada, tellus magna auctor dui, a feugiat nulla turpis ut est. Donec elementum, elit eu vulputate cursus, lectus nisi tempor leo, in dignissim orci felis quis dui. ",
     "imgs": [],
     "topics_ids": [],
     "exercises_ids": [],
@@ -45,7 +101,8 @@ List courses = [
   {
     "title": "Soccer",
     "lessons": "6 lessons",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pulvinar, urna vel facilisis malesuada, tellus magna auctor dui, a feugiat nulla turpis ut est. Donec elementum, elit eu vulputate cursus, lectus nisi tempor leo, in dignissim orci felis quis dui. ",
+    "description":
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pulvinar, urna vel facilisis malesuada, tellus magna auctor dui, a feugiat nulla turpis ut est. Donec elementum, elit eu vulputate cursus, lectus nisi tempor leo, in dignissim orci felis quis dui. ",
     "imgs": [],
     "topics_ids": [],
     "exercises_ids": [],
@@ -54,7 +111,8 @@ List courses = [
   {
     "title": "Odonto",
     "lessons": "6 lessons",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pulvinar, urna vel facilisis malesuada, tellus magna auctor dui, a feugiat nulla turpis ut est. Donec elementum, elit eu vulputate cursus, lectus nisi tempor leo, in dignissim orci felis quis dui. ",
+    "description":
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pulvinar, urna vel facilisis malesuada, tellus magna auctor dui, a feugiat nulla turpis ut est. Donec elementum, elit eu vulputate cursus, lectus nisi tempor leo, in dignissim orci felis quis dui. ",
     "imgs": [],
     "topics_ids": [],
     "exercises_ids": [],
@@ -63,7 +121,8 @@ List courses = [
   {
     "title": "Mechatronics",
     "lessons": "6 lessons",
-    "description": "Elaboraret definitionem cetero sententiae reprimique pharetra agam. Elitr taciti accumsan aeque dictumst petentium deserunt explicari ponderum dictumst. Harum molestiae gubergren iaculis scripta fugit curabitur ubique. Maiorum voluptatibus labores recteque deseruisse voluptatibus pertinacia eirmod. Malesuada elitr unum euripidis oratio recteque regione neglegentur eruditi.",
+    "description":
+        "Elaboraret definitionem cetero sententiae reprimique pharetra agam. Elitr taciti accumsan aeque dictumst petentium deserunt explicari ponderum dictumst. Harum molestiae gubergren iaculis scripta fugit curabitur ubique. Maiorum voluptatibus labores recteque deseruisse voluptatibus pertinacia eirmod. Malesuada elitr unum euripidis oratio recteque regione neglegentur eruditi.",
     "imgs": [],
     "topics_ids": [],
     "exercises_ids": [],
@@ -72,7 +131,8 @@ List courses = [
   {
     "title": "Pymes",
     "lessons": "6 lessons",
-    "description": "You sort of start thinking anything’s possible if you’ve got enough nerve.",
+    "description":
+        "You sort of start thinking anything’s possible if you’ve got enough nerve.",
     "imgs": [],
     "topics_ids": [],
     "exercises_ids": [],
@@ -80,34 +140,38 @@ List courses = [
   },
 ];
 
-List lessons =[
-  { "title_lesson": "Programming",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pulvinar, urna vel facilisis malesuada, tellus magna auctor dui, a feugiat nulla turpis ut est. Donec elementum, elit eu vulputate cursus, lectus nisi tempor leo, in dignissim orci felis quis dui. ",
-
+List lessons = [
+  {
+    "title_lesson": "Programming",
+    "description":
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pulvinar, urna vel facilisis malesuada, tellus magna auctor dui, a feugiat nulla turpis ut est. Donec elementum, elit eu vulputate cursus, lectus nisi tempor leo, in dignissim orci felis quis dui. ",
     "imgs": [],
     "topics_ids": [],
     "exercises_ids": [],
     "tests_ids": [],
   },
-  { "title_lesson": "how to cry",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pulvinar, urna vel facilisis malesuada, tellus magna auctor dui, a feugiat nulla turpis ut est. Donec elementum, elit eu vulputate cursus, lectus nisi tempor leo, in dignissim orci felis quis dui. ",
-
+  {
+    "title_lesson": "how to cry",
+    "description":
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pulvinar, urna vel facilisis malesuada, tellus magna auctor dui, a feugiat nulla turpis ut est. Donec elementum, elit eu vulputate cursus, lectus nisi tempor leo, in dignissim orci felis quis dui. ",
     "imgs": [],
     "topics_ids": [],
     "exercises_ids": [],
     "tests_ids": [],
   },
-  { "title_lesson": "how to sleep",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pulvinar, urna vel facilisis malesuada, tellus magna auctor dui, a feugiat nulla turpis ut est. Donec elementum, elit eu vulputate cursus, lectus nisi tempor leo, in dignissim orci felis quis dui. ",
-
+  {
+    "title_lesson": "how to sleep",
+    "description":
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pulvinar, urna vel facilisis malesuada, tellus magna auctor dui, a feugiat nulla turpis ut est. Donec elementum, elit eu vulputate cursus, lectus nisi tempor leo, in dignissim orci felis quis dui. ",
     "imgs": [],
     "topics_ids": [],
     "exercises_ids": [],
     "tests_ids": [],
   },
-  { "title_lesson": "how to stack overflow",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pulvinar, urna vel facilisis malesuada, tellus magna auctor dui, a feugiat nulla turpis ut est. Donec elementum, elit eu vulputate cursus, lectus nisi tempor leo, in dignissim orci felis quis dui. ",
-
+  {
+    "title_lesson": "how to stack overflow",
+    "description":
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pulvinar, urna vel facilisis malesuada, tellus magna auctor dui, a feugiat nulla turpis ut est. Donec elementum, elit eu vulputate cursus, lectus nisi tempor leo, in dignissim orci felis quis dui. ",
     "imgs": [],
     "topics_ids": [],
     "exercises_ids": [],

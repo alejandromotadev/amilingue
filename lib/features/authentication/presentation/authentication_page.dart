@@ -54,15 +54,10 @@ class _AuthenticationViewState extends State<AuthenticationView> {
                       child: Text(
                         "AMILINGUE",
                         style: TextStyle(
-                            color: Colors.white,
+                            color: primaryTextColor,
                             fontSize: 38,
                             fontWeight: FontWeight.w500,
-                            shadows: [
-                              Shadow(
-                                  color: Colors.black26,
-                                  blurRadius: 10,
-                                  offset: Offset(0, 5))
-                            ]),
+                   ),
                       ),
                     ),
                   ),
@@ -88,7 +83,7 @@ class _AuthenticationViewState extends State<AuthenticationView> {
                                     Container(
                                       width: 300,
                                       decoration: BoxDecoration(
-                                          color: secondaryBackground,
+                                          color: buttonColor,
                                           borderRadius:
                                               BorderRadius.circular(15),
                                           boxShadow: [
@@ -106,7 +101,7 @@ class _AuthenticationViewState extends State<AuthenticationView> {
                                             border: InputBorder.none,
                                             hintText: ('email'),
                                             prefixIcon: Icon(Icons.email,
-                                                color: primaryBackground)),
+                                                color: secondaryBackground)),
                                         textInputAction: TextInputAction.next,
                                       ),
                                     ),
@@ -116,7 +111,7 @@ class _AuthenticationViewState extends State<AuthenticationView> {
                                     Container(
                                       width: 300,
                                       decoration: BoxDecoration(
-                                          color: secondaryBackground,
+                                          color: primaryBackground,
                                           borderRadius:
                                               BorderRadius.circular(15),
                                           boxShadow: [
@@ -134,7 +129,7 @@ class _AuthenticationViewState extends State<AuthenticationView> {
                                             border: InputBorder.none,
                                             hintText: ('password'),
                                             prefixIcon: Icon(Icons.lock,
-                                                color: primaryBackground)),
+                                                color: secondaryBackground)),
                                         textInputAction: TextInputAction.done,
                                       ),
                                     ),
@@ -159,7 +154,7 @@ class _AuthenticationViewState extends State<AuthenticationView> {
                                           ]),
                                       child: ElevatedButton(
                                         style: ElevatedButton.styleFrom(
-                                            backgroundColor: secondaryBackground,
+                                            backgroundColor: buttonColor,
                                             shape: RoundedRectangleBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(10))),

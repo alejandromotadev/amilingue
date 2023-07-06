@@ -57,12 +57,7 @@ class _CoursesViewState extends State<CoursesView> {
                     color: secondaryBackground,
                     fontSize: 20,
                     fontWeight: FontWeight.w600,
-                    shadows: [
-                      Shadow(
-                          color: Colors.black26,
-                          blurRadius: 10,
-                          offset: Offset(0, 5))
-                    ]),
+       ),
               ),
             ],
           )
@@ -114,7 +109,7 @@ class _CoursesViewState extends State<CoursesView> {
             Container(
                 padding: const EdgeInsets.all(5),
                 decoration: BoxDecoration(
-                    color: secondaryBackground,
+                    color: primaryBackground,
                     shape: BoxShape.circle,
                     boxShadow: [
                       BoxShadow(
@@ -126,51 +121,18 @@ class _CoursesViewState extends State<CoursesView> {
                 child: Icon(
                   Icons.computer,
                   size: sizeIcon,
-                  color: primaryTextColor,
+                  color: secondaryBackground,
                 )),
             const Text(
               "Software development",
               style: TextStyle(
                 fontWeight: FontWeight.w600,
                 fontSize: 16,
-                color: secondaryBackground,
+                color: primaryTextColor,
               ),
             ),
             const Icon(Icons.navigate_next,
                 color: secondaryBackground, size: 30)
-          ]),
-          const SizedBox(height: 20,),
-          Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-              children: [
-            Container(
-                padding: const EdgeInsets.all(5),
-                decoration: BoxDecoration(
-                    color: secondaryBackground,
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.black.withOpacity(0.2),
-                          spreadRadius: 1,
-                          blurRadius: 1,
-                          offset: const Offset(0, 3))
-                    ]),
-                child: Icon(
-                  Icons.computer,
-                  size: sizeIcon,
-                  color: primaryTextColor,
-                )),
-            const Text(
-              "Machine learning",
-              style: TextStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: 16,
-                color: secondaryBackground,
-              ),
-            ),
-            const Icon(Icons.navigate_next,
-                color: secondaryBackground, size: 30, )
           ]),
         ],
       ),
@@ -196,7 +158,7 @@ class _CoursesViewState extends State<CoursesView> {
                   padding: const EdgeInsets.all(10),
                   margin: const EdgeInsets.only(bottom: 5, top: 5),
                   decoration: BoxDecoration(
-                      color: secondaryBackground,
+                      color: buttonColor,
                       borderRadius: BorderRadius.circular(20),
                       boxShadow: [
                         BoxShadow(
@@ -223,7 +185,7 @@ class _CoursesViewState extends State<CoursesView> {
                           height: 50,
                           padding: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
-                              color: secondaryBackground,
+                              color: buttonColor,
                               borderRadius: BorderRadius.circular(15),
                               boxShadow: [
                                 BoxShadow(
@@ -239,7 +201,7 @@ class _CoursesViewState extends State<CoursesView> {
                               overflow: TextOverflow.ellipsis,
                               style: const TextStyle(
                                   color: primaryTextColor,
-                                  fontWeight: FontWeight.w500),
+                                  fontWeight: FontWeight.w600),
                             ),
                           ),
                         ),
@@ -249,12 +211,12 @@ class _CoursesViewState extends State<CoursesView> {
                         left: 10,
                         child: Row(
                           children: [
-                            const Icon((Icons.play_circle_outline)),
+                            const Icon((Icons.play_circle_outline), color: secondaryBackground,),
                             const SizedBox(width: 5),
                             Text(
                               index["lessons"],
                               style: const TextStyle(
-                                  color: primaryTextColor,
+                                  color: secondaryBackground,
                                   fontWeight: FontWeight.w500),
                             ),
                             const SizedBox(width: 10),

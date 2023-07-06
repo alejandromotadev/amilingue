@@ -1,16 +1,11 @@
 import 'dart:convert';
-
 import 'package:amilingue/Widgets/Categories/presentation/pages/category_box.dart';
-import 'package:amilingue/features/authentication/data/models/auth_models.dart';
-import 'package:amilingue/features/authentication/domain/entities/user.dart';
 import 'package:amilingue/features/course_details/presentation/pages/course_details.dart';
 import 'package:amilingue/utils/contants.dart';
 import 'package:amilingue/utils/data.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-final String nameUser = "Name User";
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -59,15 +54,10 @@ class _HomeViewState extends State<HomeView> {
               Text(
                 user == null ? '' : user["name"],
                 style: const TextStyle(
-                    color: secondaryBackground,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    shadows: [
-                      Shadow(
-                          color: Colors.black26,
-                          blurRadius: 10,
-                          offset: Offset(0, 5))
-                    ]),
+                  color: secondaryBackground,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
               const SizedBox(
                 height: 5,
@@ -75,15 +65,10 @@ class _HomeViewState extends State<HomeView> {
               const Text(
                 "Welcome!",
                 style: TextStyle(
-                    color: secondaryBackground,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600,
-                    shadows: [
-                      Shadow(
-                          color: Colors.black26,
-                          blurRadius: 10,
-                          offset: Offset(0, 5))
-                    ]),
+                  color: primaryTextColor,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ],
           )
@@ -104,15 +89,10 @@ class _HomeViewState extends State<HomeView> {
             child: Text(
               "Check these courses",
               style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 22,
-                  color: secondaryBackground,
-                  shadows: [
-                    Shadow(
-                        color: Colors.black26,
-                        blurRadius: 10,
-                        offset: Offset(0, 5))
-                  ]),
+                fontWeight: FontWeight.w600,
+                fontSize: 22,
+                color: secondaryBackground,
+              ),
             ),
           ),
           const SizedBox(
@@ -161,7 +141,7 @@ class _HomeViewState extends State<HomeView> {
                   padding: const EdgeInsets.all(10),
                   margin: const EdgeInsets.only(bottom: 5, top: 5),
                   decoration: BoxDecoration(
-                      color: secondaryBackground,
+                      color: buttonColor,
                       borderRadius: BorderRadius.circular(20),
                       boxShadow: [
                         BoxShadow(
@@ -188,7 +168,7 @@ class _HomeViewState extends State<HomeView> {
                           height: 50,
                           padding: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
-                              color: secondaryBackground,
+                              color: buttonColor,
                               borderRadius: BorderRadius.circular(15),
                               boxShadow: [
                                 BoxShadow(
@@ -204,7 +184,7 @@ class _HomeViewState extends State<HomeView> {
                               overflow: TextOverflow.ellipsis,
                               style: const TextStyle(
                                   color: primaryTextColor,
-                                  fontWeight: FontWeight.w500),
+                                  fontWeight: FontWeight.w600),
                             ),
                           ),
                         ),
@@ -214,13 +194,14 @@ class _HomeViewState extends State<HomeView> {
                         left: 10,
                         child: Row(
                           children: [
-                            const Icon((Icons.play_circle_outline)),
+                            const Icon((Icons.play_circle_outline),
+                                color: secondaryBackground),
                             const SizedBox(width: 5),
                             Text(
                               index["lessons"],
                               style: const TextStyle(
-                                  color: primaryTextColor,
-                                  fontWeight: FontWeight.w500),
+                                  color: secondaryBackground,
+                                  fontWeight: FontWeight.w600),
                             ),
                             const SizedBox(width: 10),
                             Text(

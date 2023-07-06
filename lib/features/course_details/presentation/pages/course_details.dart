@@ -30,13 +30,7 @@ class _CourseViewState extends State<CourseView> {
   AppBar buildAppBar() {
     return AppBar(
       forceMaterialTransparency: true,
-      title: Text(
-        courses[0]["title"],
-        style: const TextStyle(
-            color: secondaryBackground,
-            fontSize: 18,
-            fontWeight: FontWeight.w600),
-      ),
+
     );
   }
 
@@ -51,7 +45,7 @@ class _CourseViewState extends State<CourseView> {
                 Container(
                     padding: const EdgeInsets.all(5),
                     decoration: BoxDecoration(
-                        color: secondaryBackground,
+                        color: buttonColor,
                         shape: BoxShape.circle,
                         boxShadow: [
                           BoxShadow(
@@ -67,13 +61,7 @@ class _CourseViewState extends State<CourseView> {
                   style: const TextStyle(
                       color: secondaryBackground,
                       fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                      shadows: [
-                        Shadow(
-                            color: Colors.black26,
-                            blurRadius: 10,
-                            offset: Offset(0, 5))
-                      ]),
+                      fontWeight: FontWeight.bold,),
                 )
               ],
             ),
@@ -83,9 +71,9 @@ class _CourseViewState extends State<CourseView> {
             child: Text(
               courses[4]["description"],
               style: const TextStyle(
-                color: secondaryBackground,
+                color: primaryTextColor,
                 fontSize: 16,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w600,
               ),
               textAlign: TextAlign.justify,
             ),
@@ -106,7 +94,7 @@ class _CourseViewState extends State<CourseView> {
                 ]),
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                  backgroundColor: secondaryBackground,
+                  backgroundColor: buttonColor,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10))),
               onPressed: () {},
@@ -132,7 +120,7 @@ class _CourseViewState extends State<CourseView> {
                     ),
                     Text(
                       categories[1]["name"],
-                      style: const TextStyle(color: secondaryBackground),
+                      style: const TextStyle(color: primaryTextColor, fontWeight: FontWeight.w500),
                     )
                   ],
                 ),
@@ -145,7 +133,7 @@ class _CourseViewState extends State<CourseView> {
                             fontSize: 16)),
                     Text(
                       courses[1]["title"],
-                      style: const TextStyle(color: secondaryBackground),
+                      style: const TextStyle(color: primaryTextColor, fontWeight: FontWeight.w500),
                     )
                   ],
                 )
@@ -162,12 +150,7 @@ class _CourseViewState extends State<CourseView> {
                     color: secondaryBackground,
                     fontSize: 24,
                     fontWeight: FontWeight.w600,
-                    shadows: [
-                      Shadow(
-                          color: Colors.black26,
-                          blurRadius: 10,
-                          offset: Offset(0, 5))
-                    ],
+
                   ),
                 ),
               ],
@@ -179,47 +162,37 @@ class _CourseViewState extends State<CourseView> {
               children: [
                 Column(
                   children: [
-                    /*Hero(
-                      tag: 'ListTile-Hero',
-                      child: Material(
-                        child: ListTile(
-                          title: Text('ListTile with Hero'),
-                          subtitle: Text('Tap here for Hero transition'),
-                          tileColor: Colors.cyan,
-                        ),
-                      ),
-                    ),*/
                     SizedBox(
                       height: 30,
                       child: Text("Lesson 1",
                           style: TextStyle(
-                              color: secondaryBackground,
+                              color: primaryTextColor,
                               fontSize: 16,
-                              fontWeight: FontWeight.w500)),
+                              fontWeight: FontWeight.w600)),
                     ),
                     SizedBox(
                       height: 30,
                       child: Text("Lesson 1",
                           style: TextStyle(
-                              color: secondaryBackground,
+                              color: primaryTextColor,
                               fontSize: 16,
-                              fontWeight: FontWeight.w500)),
+                              fontWeight: FontWeight.w600)),
                     ),
                     SizedBox(
                       height: 30,
                       child: Text("Lesson 1",
                           style: TextStyle(
-                              color: secondaryBackground,
+                              color: primaryTextColor,
                               fontSize: 16,
-                              fontWeight: FontWeight.w500)),
+                              fontWeight: FontWeight.w600)),
                     ),
                     SizedBox(
                       height: 30,
                       child: Text("Lesson 1",
                           style: TextStyle(
-                              color: secondaryBackground,
+                              color: primaryTextColor,
                               fontSize: 16,
-                              fontWeight: FontWeight.w500)),
+                              fontWeight: FontWeight.w600)),
                     ),
 
                   ],
@@ -245,7 +218,7 @@ class _CourseViewState extends State<CourseView> {
                   ]),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: secondaryBackground,
+                    backgroundColor: buttonColor,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10))),
                 onPressed: () {},

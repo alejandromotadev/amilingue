@@ -23,7 +23,7 @@ class NavigationPage extends StatelessWidget {
       bottomNavigationBar: BlocBuilder<NavigationCubit, int>(
         builder: (context, state) {
           return BottomNavigationBar(
-            backgroundColor: secondaryBackground,
+            backgroundColor: primaryBackground,
             enableFeedback: true,
             currentIndex: context.read<NavigationCubit>().state,
             onTap: (index) {
@@ -32,18 +32,18 @@ class NavigationPage extends StatelessWidget {
             items: const [
               BottomNavigationBarItem(
                 icon: Icon(Icons.home, color: primaryTextColor,),
-                label: "home",
-                activeIcon: Icon(Icons.home, color: primaryBackground,),
+                label: "",
+                activeIcon: Icon(Icons.home, color: secondaryBackground,),
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.task, color: primaryTextColor,),
-                label: "my courses",
-                activeIcon: Icon(Icons.task, color: primaryBackground,),
+                label: "",
+                activeIcon: Icon(Icons.task, color: secondaryBackground,),
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.person, color: primaryTextColor,),
-                label: "profile",
-                activeIcon: Icon(Icons.person, color: primaryBackground,),
+                label: "",
+                activeIcon: Icon(Icons.person, color: secondaryBackground,),
               )
             ],
           );
