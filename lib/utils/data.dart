@@ -1,7 +1,7 @@
 import 'package:amilingue/utils/contants.dart';
 import 'package:flutter/material.dart';
 
-double sizeIcon = 40;
+double sizeIcon = 30;
 List categories = [
   {"name": "All", "icon": Icon(Icons.category, size: sizeIcon, color: primaryTextColor,)},
   {"name": "Tech", "icon": Icon(Icons.computer, size: sizeIcon, color: primaryTextColor,)},

@@ -1,5 +1,6 @@
 import 'package:amilingue/Widgets/Navigation/cubit/navigation_cubit.dart';
 import 'package:amilingue/features/course_home/presentation/pages/home.dart';
+import 'package:amilingue/features/course_user/presentation/pages/user_courses_page.dart';
 import 'package:amilingue/features/profile/presentation/page/profile_view.dart';
 import 'package:amilingue/utils/contants.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,7 @@ class NavigationPage extends StatelessWidget {
     //TODO: AGREGAR MAS VISTAS
     final screens = [
       const HomeView(),
+      const CoursesView(),
       const ProfileView()
     ];
 
