@@ -9,6 +9,6 @@ const blackTextColor= Color(0xff4A4A4A);
 const buttonColor = Color(0xffFFF6FF);
 
 const darkmodebutton = Color(0xff906cf3);
-const darkmodeTextColor = Color(0xfffffff);
+const darkmodeTextColor = Color(0xffFFFFFF);
 const darkmodeprimarycolor = Color(0xff000000);
-const darkmodeSecondarycolor = Color(0xfffffff);
+const darkmodeSecondarycolor = Color(0xffFFFFFF);

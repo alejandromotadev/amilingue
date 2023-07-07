@@ -25,18 +25,13 @@ class MyApp extends StatelessWidget {
             BlocProvider(create: (context) => SettingsSwitchCubit(context.read<AppThemeCubit>().state),),
             BlocProvider(create: (context) => SettingsLogoutCubit(),),
           ],
-          child: BlocBuilder<AppThemeCubit, bool>(
-          builder: (context, state) {
-            return MaterialApp(
-              title: 'Flutter Demo',
-              debugShowCheckedModeBanner: false,
-              theme: state
-                  ? ThemeData.dark(useMaterial3: true)
-                  : ThemeData.light(useMaterial3: true),
-              home: const AuthenticationView(),
+          child:  MaterialApp(
+            title: 'Flutter Demo',
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData.light(useMaterial3: true),
+            home: const AuthenticationView(),
 
-            );
-          }),
+          ),
         ));
   }
 }

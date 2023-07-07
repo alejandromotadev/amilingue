@@ -1,6 +1,7 @@
 import 'package:amilingue/Widgets/Navigation/cubit/navigation_cubit.dart';
 import 'package:amilingue/features/course_home/presentation/pages/home.dart';
 import 'package:amilingue/features/course_user/presentation/pages/user_courses_page.dart';
+import 'package:amilingue/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:amilingue/features/profile/presentation/page/profile_view.dart';
 import 'package:amilingue/utils/contants.dart';
 import 'package:flutter/material.dart';
@@ -22,30 +23,34 @@ class NavigationPage extends StatelessWidget {
     return Scaffold(
       bottomNavigationBar: BlocBuilder<NavigationCubit, int>(
         builder: (context, state) {
-          return BottomNavigationBar(
-            backgroundColor: primaryBackground,
-            enableFeedback: true,
-            currentIndex: context.read<NavigationCubit>().state,
-            onTap: (index) {
-              context.read<NavigationCubit>().changePage(index);
-            },
-            items: const [
-              BottomNavigationBarItem(
-                icon: Icon(Icons.home, color: primaryTextColor,),
-                label: "",
-                activeIcon: Icon(Icons.home, color: secondaryBackground,),
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.task, color: primaryTextColor,),
-                label: "",
-                activeIcon: Icon(Icons.task, color: secondaryBackground,),
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.person, color: primaryTextColor,),
-                label: "",
-                activeIcon: Icon(Icons.person, color: secondaryBackground,),
-              )
-            ],
+          return BlocBuilder<AppThemeCubit, bool>(
+            builder: (context, snapshot) {
+              return BottomNavigationBar(
+                backgroundColor: snapshot ? darkmodeprimarycolor : primaryBackground,
+                enableFeedback: true,
+                currentIndex: context.read<NavigationCubit>().state,
+                onTap: (index) {
+                  context.read<NavigationCubit>().changePage(index);
+                },
+                items: const [
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.home, color: primaryTextColor,),
+                    label: "",
+                    activeIcon: Icon(Icons.home, color: secondaryBackground,),
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.task, color: primaryTextColor,),
+                    label: "",
+                    activeIcon: Icon(Icons.task, color: secondaryBackground,),
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.person, color: primaryTextColor,),
+                    label: "",
+                    activeIcon: Icon(Icons.person, color: secondaryBackground,),
+                  )
+                ],
+              );
+            }
           );
         },
       ),

@@ -17,6 +17,9 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
       final body = response.data;
       print(body);
       await sharedPreferences.setString("user", jsonEncode(body));
+      await sharedPreferences.setString("email", jsonEncode(body));
+
+
     }catch(error){
       print("error en funcion login UserRemoteDatasourcesImpl ====> ${error}");
     }

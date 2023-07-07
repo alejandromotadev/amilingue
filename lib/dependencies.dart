@@ -3,7 +3,6 @@ import 'package:amilingue/features/authentication/data/datasources/user_remote_d
 import 'package:amilingue/features/authentication/data/repository/user_repository_impl.dart';
 import 'package:amilingue/features/authentication/domain/repositories/user_repository.dart';
 import 'package:amilingue/features/authentication/domain/usecases/user_usecase.dart';
-import 'package:amilingue/features/lessons/domain/usecases/lesson_usecase.dart';
 import 'package:amilingue/features/profile/data/data/profile_datasources.dart';
 import 'package:amilingue/features/profile/data/data/profile_remote:_datasource.dart';
 import 'package:amilingue/features/profile/data/repository/persistent_storage_repository_impl.dart';
@@ -25,6 +24,5 @@ List<RepositoryProvider> buildRepositories(){
 
     //Use cases
     RepositoryProvider<UserUseCase>(create: (context) => UserUseCase(context.read())),
-    RepositoryProvider<LessonUseCase>(create: (context) => LessonUseCase(context.read()),),
   ];
 }
