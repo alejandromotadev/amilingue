@@ -1,22 +1,24 @@
+import 'dart:convert';
+
 import 'package:amilingue/features/authentication/data/datasources/user_remote_datasource.dart';
-import 'package:amilingue/features/authentication/data/models/auth_models.dart';
 import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   @override
-  Future<UserModel?> login(String email, String password) async {
-    print("===============Login USER DATASOURCE IMPL==============");
-
+  Future<void> login(String email, String password) async {
+    SharedPreferences sharedPreferences= await SharedPreferences.getInstance();
     const api = "http://10.0.2.2:3003/api/v1/login";
     final data = {"email": email, "password": password};
     final dio = Dio();
     Response response;
-    response = await dio.post(api, data: data);
-    if (response.statusCode == 200) {
-      final body = response.data['data'];
-      return UserModel(email: body['email'], password: body["password"], name: body["name"], user_name: body["user_name"]);
-    } else {
-      return null;
+    try{
+      response = await dio.post(api, data: data);
+      final body = response.data;
+      print(body);
+      await sharedPreferences.setString("user", jsonEncode(body));
+    }catch(error){
+      print("error en funcion login UserRemoteDatasourcesImpl ====> ${error}");
     }
   }
 }

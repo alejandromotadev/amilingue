@@ -1,7 +1,7 @@
-import 'package:amilingue/features/profile/domain/repositories.dart';
+import 'package:amilingue/features/profile/data/data/profile_remote:_datasource.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class PersistentStorageImpl extends PersistentStorageRepository{
+class PersistentStorageDataSourcesImpl extends PersistentStorageRemoteDataSource{
   static const _isDarkModePref = "isDarkMode";
   @override
   Future<bool> isDarkMode() async{

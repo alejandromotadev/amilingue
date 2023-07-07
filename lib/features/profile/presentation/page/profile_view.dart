@@ -61,6 +61,13 @@ class _ProfileViewState extends State<ProfileView> {
                 Text(user == null ? 'place' : user["name"]),
               ],
             ),
+            BlocBuilder<SettingsSwitchCubit, bool>(
+                builder: (context,state){
+                  return Switch(value: state, onChanged: (val){
+                    context.read<SettingsSwitchCubit>().changeDarkMode(val);
+                    context.read<AppThemeCubit>().updateTheme(val);
+                  });
+                }),
             BlocListener<SettingsLogoutCubit, void>(
               child: Container(
                 width: 200,

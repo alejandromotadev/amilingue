@@ -1,4 +1,4 @@
-import 'package:amilingue/features/profile/domain/repositories.dart';
+import 'package:amilingue/features/profile/domain/repository/repositories.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SettingsSwitchCubit extends Cubit<bool>{
