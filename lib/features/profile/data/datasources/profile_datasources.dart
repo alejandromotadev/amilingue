@@ -1,4 +1,4 @@
-import 'package:amilingue/features/profile/data/data/profile_remote:_datasource.dart';
+import 'package:amilingue/features/profile/data/datasources/profile_remote_datasource.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PersistentStorageDataSourcesImpl extends PersistentStorageRemoteDataSource{

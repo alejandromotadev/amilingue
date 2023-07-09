@@ -3,8 +3,8 @@ import 'package:amilingue/features/authentication/data/datasources/user_remote_d
 import 'package:amilingue/features/authentication/data/repository/user_repository_impl.dart';
 import 'package:amilingue/features/authentication/domain/repositories/user_repository.dart';
 import 'package:amilingue/features/authentication/domain/usecases/user_usecase.dart';
-import 'package:amilingue/features/profile/data/data/profile_datasources.dart';
-import 'package:amilingue/features/profile/data/data/profile_remote:_datasource.dart';
+import 'package:amilingue/features/profile/data/datasources/profile_datasources.dart';
+import 'package:amilingue/features/profile/data/datasources/profile_remote_datasource.dart';
 import 'package:amilingue/features/profile/data/repository/persistent_storage_repository_impl.dart';
 import 'package:amilingue/features/profile/domain/repository/repositories.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

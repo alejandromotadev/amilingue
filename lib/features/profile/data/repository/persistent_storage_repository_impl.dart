@@ -1,4 +1,4 @@
-import 'package:amilingue/features/profile/data/data/profile_remote:_datasource.dart';
+import 'package:amilingue/features/profile/data/datasources/profile_remote_datasource.dart';
 import 'package:amilingue/features/profile/domain/repository/repositories.dart';
 
 class PersistentStorageRepositoryImpl implements PersistentStorageRepository{
