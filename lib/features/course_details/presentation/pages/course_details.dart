@@ -1,5 +1,3 @@
-import 'package:amilingue/Widgets/Categories/presentation/pages/category_box.dart';
-import 'package:amilingue/features/lessons/presentation/pages/lesson_course.dart';
 import 'package:amilingue/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:amilingue/utils/contants.dart';
 import 'package:amilingue/utils/data.dart';
