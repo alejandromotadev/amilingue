@@ -1,3 +1,5 @@
+import 'package:amilingue/features/excersices/study_screen1.dart';
+import 'package:amilingue/features/excersices/study_screen3.dart';
 import 'package:amilingue/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:amilingue/utils/contants.dart';
 import 'package:amilingue/utils/data.dart';
@@ -100,7 +102,10 @@ class _CourseViewState extends State<CourseView> {
                     backgroundColor: state ? darkmodebutton : buttonColor,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10))),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (_) => const Study_Screen1()));
+                },
                 child: Text(
                   "Study",
                   style: TextStyle(

@@ -48,7 +48,9 @@ class _Study_Screen3State extends State<Study_Screen3> {
       appBar: AppBar(
         forceMaterialTransparency: true,
         leading: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pop(context);
+            },
             icon: const Icon(
               Icons.arrow_back,
               color: secondaryBackground,

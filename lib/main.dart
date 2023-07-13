@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
             title: 'Flutter Demo',
             debugShowCheckedModeBanner: false,
             theme: ThemeData.light(useMaterial3: true),
-            home: const Study_Screen3(),
+            home: const AuthenticationView(),
 
           ),
         ));
