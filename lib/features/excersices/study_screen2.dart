@@ -1,13 +1,19 @@
 import 'dart:math';
 
+import 'package:amilingue/features/course_details/data/models/course_model.dart';
+import 'package:amilingue/features/course_details/domain/entity/course.dart';
 import 'package:amilingue/utils/contants.dart';
+import 'package:amilingue/utils/data.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
+import '../lessons/data/models/lesson_model.dart';
+import '../lessons/domain/entity/lessons.dart';
+
 // ignore: camel_case_types
 class Study_Screen2 extends StatefulWidget {
-  
   const Study_Screen2({super.key});
 
   @override
@@ -15,6 +21,7 @@ class Study_Screen2 extends StatefulWidget {
 }
 
 class _Study_Screen2State extends State<Study_Screen2> {
+  var courseList;
   List<Map<String, String>> listaSimulada = [
     {
       'id': '1',
@@ -52,7 +59,23 @@ class _Study_Screen2State extends State<Study_Screen2> {
       listaSimulada2.sort();
     });
   }
+   Stream<List<CourseEntity>> getCourse(CourseEntity course) async* {
+    final dio = Dio();
+    final response =
+        await dio.get('http://44.212.243.195/api-docs/course/api/v1/course');
 
+    if (response.statusCode == 200) {
+            courseList = response;
+    } else {
+      throw Exception('Failed to fetch Courses');
+    }
+  }
+
+  List<Map<String, dynamic>>? listCourses(){
+    if(courseList != null && courseList["data"] != null ){
+      return (courseList["data"] as List).map((e) => e as Map<String, dynamic>).toList();
+    }
+  }
   // This method set the new index to the element.
   void reorderData(int oldindex, int newindex) {
     setState(() {
@@ -98,53 +121,50 @@ class _Study_Screen2State extends State<Study_Screen2> {
         body: Material(
           child: SingleChildScrollView(
             child: Center(
+              
                 child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Padding(
-                  padding: EdgeInsets.only(top: 80),
-                  child: Text(
-                    "Complete the sentences",
-                    style: TextStyle(
-                        color: secondaryBackground,
-                        fontSize: 24,
-                        fontWeight: FontWeight.w800),
-                  ),
+                const Text(
+                  "Complete the sentences",
+                  style: TextStyle(
+                      color: secondaryBackground,
+                      fontSize: 24,
+                      fontWeight: FontWeight.w800),
                 ),
-                Padding(
-                    padding: EdgeInsets.only(top: 60, left: 8),
-                    child: Row(
-                      children: [
-                        Container(
-                          width: 170,
-                          height: 210, 
+                Row(
 
-                          child: ListView.builder(
-                             physics: NeverScrollableScrollPhysics(),
-                            scrollDirection: Axis.vertical,
-                            shrinkWrap: true,
-                            itemCount: listaSimulada.length,
-                            itemBuilder: (context, index) {
-                              final item = listaSimulada[index];
-                              return Card(
-                                  key: ValueKey(item['id']),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  elevation: 4,
-                                  child: ListTile(
-                                    key: ValueKey(item['id']),
-                                    title: Text(
-                                      item['texto'].toString(),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                    contentPadding: EdgeInsets.symmetric(
-                                        vertical: 2, horizontal: 16),
-                                  ));
-                            },
-                           
-                          ),
-                        ),
-                        Column(
+                  children: [
+                    Container(
+                      width: 170,
+                      height: 210,
+                      child: ListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        itemCount: listaSimulada.length,
+                        itemBuilder: (context, index) {
+                          final item = listaSimulada[index];
+                          return Card(
+                              key: ValueKey(item['id']),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              elevation: 4,
+                              child: ListTile(
+                                key: ValueKey(item['id']),
+                                title: Text(
+                                  item['texto'].toString(),
+                                  textAlign: TextAlign.center,
+                                ),
+                                contentPadding: EdgeInsets.symmetric(
+                                    vertical: 2, horizontal: 16),
+                              ));
+                        },
+                      ),
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Padding(
                           padding: EdgeInsets.only(bottom: 130),
@@ -169,71 +189,70 @@ class _Study_Screen2State extends State<Study_Screen2> {
                         ),
                       ],
                     ),
-                        Container(
-                          width: 170,
-                          height: 210, 
-
-                          child: ReorderableListView.builder(
-                             physics: NeverScrollableScrollPhysics(),
-                            scrollDirection: Axis.vertical,
-                            shrinkWrap: true,
-                            itemCount: listaSimulada2.length,
-                            itemBuilder: (context, index) {
-                              final items = listaSimulada2[index];
-                              return Card(
-                                  key: ValueKey(items['id']),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  elevation: 4,
-                                  child: ListTile(
-                                    key: ValueKey(items['id']),
-                                    title: Text(
-                                      items['texto'].toString(),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                    contentPadding: EdgeInsets.symmetric(
-                                        vertical: 2, horizontal: 16),
-                                  ));
-                            },
-                            onReorder: (oldIndex, newIndex) {
-                              setState(() {
-                                if (newIndex > oldIndex) {
-                                  newIndex -= 1;
-                                }
-                                final item = listaSimulada2.removeAt(oldIndex);
-                                listaSimulada2.insert(newIndex, item);
-                              });
-                            },
-                          ),
-                        ),
-                      ],
-                    )),
-                Padding(
-                    padding: EdgeInsets.only(top: 190),
-                    child: Container(
-                      width: 320,
-                      height: 50,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                              Color.fromARGB(255, 115, 225,
-                                  119)), // Set the background color to green
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                  7), // Adjust the corner radius as desired
-                            ),
-                          ),
-                        ),
-                        onPressed: () {},
-                        child: const Text(
-                          "Check",
-                          style: TextStyle(fontWeight: FontWeight.w800),
+                    Container(
+                      width: 170,
+                      height: 210,
+                      child: ReorderableListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        itemCount: listaSimulada2.length,
+                        itemBuilder: (context, index) {
+                          final items = listaSimulada2[index];
+                          return Card(
+                              key: ValueKey(items['id']),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              elevation: 4,
+                              child: ListTile(
+                                key: ValueKey(items['id']),
+                                title: Text(
+                                  items['texto'].toString(),
+                                  textAlign: TextAlign.center,
+                                ),
+                                contentPadding: EdgeInsets.symmetric(
+                                    vertical: 2, horizontal: 16),
+                              ));
+                        },
+                        onReorder: (oldIndex, newIndex) {
+                          setState(() {
+                            if (newIndex > oldIndex) {
+                              newIndex -= 1;
+                            }
+                            final item = listaSimulada2.removeAt(oldIndex);
+                            listaSimulada2.insert(newIndex, item);
+                          });
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  
+                  width: 320,
+                  height: 50,
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          Color.fromARGB(255, 115, 225,
+                              119)), // Set the background color to green
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(
+                              7), // Adjust the corner radius as desired
                         ),
                       ),
-                    ))
+                    ),
+                    onPressed: () {
+debugPrint(listCourses().toString());},
+                    child: const Text(
+                      "Check",
+                      style: TextStyle(fontWeight: FontWeight.w800),
+                    ),
+                  ),
+                ) 
+
               ],
             )),
           ),

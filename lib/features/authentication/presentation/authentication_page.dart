@@ -160,9 +160,9 @@ class _AuthenticationViewState extends State<AuthenticationView> {
                                                     BorderRadius.circular(10))),
                                         onPressed: () {
 
-                                          Navigator.of(context).pushReplacement(
-                                              MaterialPageRoute(builder: (_) => const NavigationPage()));
-                                          /*if (emailController.text.isNotEmpty ||
+                                          /* Navigator.of(context).pushReplacement(
+                                              MaterialPageRoute(builder: (_) => const NavigationPage())); */
+                                          if (emailController.text.isNotEmpty ||
                                               passwordController
                                                   .text.isNotEmpty) {
                                             context.read<AuthenticationCubit>().loginCubit(emailController.text, passwordController.text);
@@ -182,7 +182,7 @@ class _AuthenticationViewState extends State<AuthenticationView> {
                                                 ),
                                               ),
                                             );
-                                          }*/
+                                          }
                                         },
                                         child: const Text(
                                           "sign in",
