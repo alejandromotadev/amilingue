@@ -32,13 +32,13 @@ class MyApp extends StatelessWidget {
             BlocProvider(create: (context) => AppThemeCubit(context.read())..init(),),
             BlocProvider(create: (context) => SettingsSwitchCubit(context.read<AppThemeCubit>().state),),
             BlocProvider(create: (context) => SettingsLogoutCubit(),),
-            BlocProvider(create: (BuildContext context) =>   CourseCubit( getCourseUseCase: usecaseConfig.getCourseUsecase))
+            BlocProvider(create: (BuildContext context) =>   CourseCubit( getCourseUseCase: usecaseConfig.getCourseUsecase)),
             BlocProvider(create: (BuildContext context) =>   LessonCubit( getLessonUseCase: usecaseConfig.getLessonUsecase))
           ],
           child:  MaterialApp(
             title: 'Flutter Demo',
             debugShowCheckedModeBanner: false,
-            theme: ThemeData.light(useMaterial3: true),
+            theme: ThemeData(fontFamily: 'Fredoka'),
             home: const AuthenticationView(),
 
           ),

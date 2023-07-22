@@ -13,7 +13,7 @@ class LessonRemoteDataSourceImpl implements LessonRemoteDataSource {
     final idLesson = lesson.id;
     final dio = Dio();
     try {
-      final response = await dio.delete('http://44.207.29.98/lessons/api-docs/api/v1/lessons/$idLesson');
+      final response = await dio.delete('lesson.stevenpadilla.dev/api/v1/lessons/$idLesson');
       if (response.statusCode == 200){
         print("Deleted");
       }else {
@@ -28,7 +28,7 @@ class LessonRemoteDataSourceImpl implements LessonRemoteDataSource {
   Stream<List<LessonEntity>> getLesson() async* {
     final dio = Dio();
     final response =
-        await dio.get('http://44.207.29.98/lessons/api-docs/api/v1/lessons');
+        await dio.get('lesson.stevenpadilla.dev/api/v1/lessons');
 
     if (response.statusCode == 200) {
       final lessonList = (response.data["data"] as List)
@@ -45,7 +45,7 @@ class LessonRemoteDataSourceImpl implements LessonRemoteDataSource {
     var dio = Dio();
     
     try {
-      final response = await dio.put('http://44.207.29.98/lessons/api-docs/api/v1/lessons', data:  {
+      final response = await dio.put('lesson.stevenpadilla.dev/api/v1/lessons', data:  {
       "id": lesson.id,
       "title": lesson.title,
       "subTitle": lesson.subTitle,
@@ -65,7 +65,7 @@ class LessonRemoteDataSourceImpl implements LessonRemoteDataSource {
 
   @override
   Future<void> createLesson(LessonEntity lesson) async {
-    const api = "http://44.207.29.98/lessons/api-docs/api/v1/lessons";
+    const api = "lesson.stevenpadilla.dev/api/v1/lessons";
     final data = {
       "id": lesson.id,
       "title": lesson.title,

@@ -87,6 +87,6 @@ class UsecaseConfig {
     createCourseUsecase = CreateCourseUseCase(repository: courseRepositoryImpl);
     updateCourseUsecase = UpdateCourseUseCase(repository: courseRepositoryImpl);
     deleteCourseUsecase = DeleteCourseUseCase(repository: courseRepositoryImpl);
-    getLessonUsecase = GetLessonUseCase(repository: lessonRepositoryImpl)
+    getLessonUsecase = GetLessonUseCase(repository: lessonRepositoryImpl);
   }
 }

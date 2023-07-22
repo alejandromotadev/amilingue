@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:amilingue/features/authentication/data/datasources/user_remote_datasource.dart';
+import 'package:amilingue/features/authentication/domain/entities/user.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -23,5 +24,29 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
     }catch(error){
       print("error en funcion login UserRemoteDatasourcesImpl ====> ${error}");
     }
+  }
+
+  @override
+  Future<void> createUser(UserEntity user) {
+    // TODO: implement createUser
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> deleteUser(UserEntity user) {
+    // TODO: implement deleteUser
+    throw UnimplementedError();
+  }
+
+  @override
+  Stream<List<UserEntity>> getUser() {
+    // TODO: implement getUser
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> updateUser(UserEntity user) {
+    // TODO: implement updateUser
+    throw UnimplementedError();
   }
 }
