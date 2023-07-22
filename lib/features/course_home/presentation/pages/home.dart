@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:amilingue/Widgets/Categories/presentation/pages/category_box.dart';
 import 'package:amilingue/features/course_details/presentation/pages/course_details.dart';
+import 'package:amilingue/features/course_details/presentation/pages/cubit/course_cubit.dart';
 import 'package:amilingue/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:amilingue/utils/contants.dart';
 import 'package:amilingue/utils/data.dart';
@@ -52,69 +53,65 @@ class _HomeViewState extends State<HomeView> {
       automaticallyImplyLeading: false,
       forceMaterialTransparency: true,
       elevation: 0,
-      title: BlocBuilder<AppThemeCubit, bool>(
-        builder: (context, state) {
-          return Row(
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    user == null ? '' : user["name"],
-                    style: const TextStyle(
-                      color: secondaryBackground,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                    ),
+      title: BlocBuilder<AppThemeCubit, bool>(builder: (context, state) {
+        return Row(
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  user == null ? '' : user["name"],
+                  style: const TextStyle(
+                    color: secondaryBackground,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
                   ),
-                  const SizedBox(
-                    height: 5,
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  "Welcome!",
+                  style: TextStyle(
+                    color: state ? darkmodeTextColor : primaryTextColor,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
                   ),
-                   Text(
-                    "Welcome!",
-                    style: TextStyle(
-                      color: state ? darkmodeTextColor : primaryTextColor,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
-              )
-            ],
-          );
-        }
-      ),
+                ),
+              ],
+            )
+          ],
+        );
+      }),
     );
   }
 
   Widget buildBody() {
     return SingleChildScrollView(
-      child: BlocBuilder<AppThemeCubit,bool>(
-        builder: (context, state) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              getCategories(),
-              const SizedBox(height: 20),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(15, 0, 15, 10),
-                child: Text(
-                  "Check these courses",
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 22,
-                    color: state ? darkmodeSecondarycolor : secondaryBackground,
-                  ),
+      child: BlocBuilder<AppThemeCubit, bool>(builder: (context, state) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            getCategories(),
+            const SizedBox(height: 20),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(15, 0, 15, 10),
+              child: Text(
+                "Check these courses",
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 22,
+                  color: state ? darkmodeSecondarycolor : secondaryBackground,
                 ),
               ),
-              const SizedBox(
-                height: 10,
-              ),
-              getCourses(),
-            ],
-          );
-        }
-      ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            getCourses(),
+          ],
+        );
+      }),
     );
   }
 
@@ -137,12 +134,15 @@ class _HomeViewState extends State<HomeView> {
   }
 
   Widget getCourses() {
-    return BlocBuilder<AppThemeCubit, bool>(
-      builder: (context, state) {
+    return BlocBuilder<CourseCubit, CourseState>(builder: (context, state) {
+      final courseController = context.read<CourseCubit>();
+
+      return BlocBuilder<AppThemeCubit, bool>(builder: (context, state) {
         return CarouselSlider(
             options: CarouselOptions(
                 height: 190, enlargeCenterPage: true, disableCenter: true),
-            items: courses.map((index) {
+            //courseController.courseList.map
+            items: courseController.courseList.map((index) {
               return Builder(
                 builder: (BuildContext context) {
                   return InkWell(
@@ -198,8 +198,10 @@ class _HomeViewState extends State<HomeView> {
                                   index["title"],
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
-                                  style:  TextStyle(
-                                      color: state ? darkmodeTextColor : primaryTextColor,
+                                  style: TextStyle(
+                                      color: state
+                                          ? darkmodeTextColor
+                                          : primaryTextColor,
                                       fontWeight: FontWeight.w600),
                                 ),
                               ),
@@ -210,13 +212,17 @@ class _HomeViewState extends State<HomeView> {
                             left: 10,
                             child: Row(
                               children: [
-                                 Icon((Icons.play_circle_outline),
-                                    color: state ? darkmodeSecondarycolor : secondaryBackground),
+                                Icon((Icons.play_circle_outline),
+                                    color: state
+                                        ? darkmodeSecondarycolor
+                                        : secondaryBackground),
                                 const SizedBox(width: 5),
                                 Text(
-                                  index["lessons"],
-                                  style:  TextStyle(
-                                      color: state ? darkmodeSecondarycolor :secondaryBackground,
+                                  "lessons",
+                                  style: TextStyle(
+                                      color: state
+                                          ? darkmodeSecondarycolor
+                                          : secondaryBackground,
                                       fontWeight: FontWeight.w600),
                                 ),
                                 const SizedBox(width: 10),
@@ -224,7 +230,10 @@ class _HomeViewState extends State<HomeView> {
                                   index["description"],
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
-                                  style:  TextStyle(color: state ? darkmodeSecondarycolor : primaryTextColor),
+                                  style: TextStyle(
+                                      color: state
+                                          ? darkmodeSecondarycolor
+                                          : primaryTextColor),
                                 ),
                               ],
                             ),
@@ -236,7 +245,7 @@ class _HomeViewState extends State<HomeView> {
                 },
               );
             }).toList());
-      }
-    );
+      });
+    });
   }
 }

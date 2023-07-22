@@ -1,4 +1,3 @@
-
 import 'package:amilingue/features/course_details/domain/repository/course_repository.dart';
 import 'package:amilingue/features/course_details/domain/entity/course.dart';
 
@@ -7,7 +6,7 @@ class GetCourseUseCase {
 
   GetCourseUseCase({required this.repository});
 
-  Stream<List<CourseEntity>> call() {
+  Future<List> call() {
     return repository.getCourse();
   }
 }

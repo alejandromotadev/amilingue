@@ -9,7 +9,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   @override
   Future<void> login(String email, String password) async {
     SharedPreferences sharedPreferences= await SharedPreferences.getInstance();
-    const api = "http://10.0.2.2:3003/api/v1/login";
+    const api = "https://user.stevenpadilla.dev/api/v1/user/login";
     final data = {"email": email, "password": password};
     final dio = Dio();
     Response response;
@@ -19,8 +19,6 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
       print(body);
       await sharedPreferences.setString("user", jsonEncode(body));
       await sharedPreferences.setString("email", jsonEncode(body));
-
-
     }catch(error){
       print("error en funcion login UserRemoteDatasourcesImpl ====> ${error}");
     }
@@ -32,21 +30,4 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
     throw UnimplementedError();
   }
 
-  @override
-  Future<void> deleteUser(UserEntity user) {
-    // TODO: implement deleteUser
-    throw UnimplementedError();
-  }
-
-  @override
-  Stream<List<UserEntity>> getUser() {
-    // TODO: implement getUser
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<void> updateUser(UserEntity user) {
-    // TODO: implement updateUser
-    throw UnimplementedError();
-  }
 }

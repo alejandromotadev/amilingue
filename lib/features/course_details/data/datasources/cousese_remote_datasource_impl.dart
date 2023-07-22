@@ -2,59 +2,58 @@ import 'package:amilingue/features/course_details/data/datasources/course_remote
 import 'package:amilingue/features/course_details/data/models/course_model.dart';
 import 'package:amilingue/features/course_details/domain/entity/course.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 
 class CourseRemoteDataSourceImpl implements CourseRemoteDataSource {
   @override
-  Future<void> deleteCourse(CourseEntity course)async {
+  Future<void> deleteCourse(CourseEntity course) async {
     final idCourse = course.id;
     final dio = Dio();
     try {
-      final response = await dio.delete('lesson.stevenpadilla.dev/course/api/v1/course/$idCourse');
-      if (response.statusCode == 200){
+      final response = await dio
+          .delete('lesson.stevenpadilla.dev/course/api/v1/course/$idCourse');
+      if (response.statusCode == 200) {
         print("Deleted");
-      }else {
-      throw Exception('Server error');
-    }
+      } else {
+        throw Exception('Server error');
+      }
     } catch (e) {
       print('$e');
     }
   }
 
   @override
-  Stream<List<CourseEntity>> getCourse() async* {
+  Future<List> getCourse() async {
     final dio = Dio();
     final response =
-        await dio.get('lesson.stevenpadilla.dev/course/api/v1/course');
-
+        await dio.get('https://course.stevenpadilla.dev/api/v1/courses');
     if (response.statusCode == 200) {
-      final courseList = (response.data["data"] as List)
-          .map((e) => CourseModel.fromJson(e))
-          .toList();
-      yield courseList;
+      return response.data;
     } else {
       throw Exception('Failed to fetch Courses');
     }
   }
 
   @override
-  Future<void> updateCourse(CourseEntity course)async {
+  Future<void> updateCourse(CourseEntity course) async {
     var dio = Dio();
-    
+
     try {
-      final response = await dio.put('lesson.stevenpadilla.dev/course/api/v1/Courses', data:  {
-      "id": course.id,
-      "title": course.title,
-      "description": course.description,
-      "exervisesIds": course.exercisesIds,
-      "testIds": course.testIds,
-      "topicsIds": course.topicsIds,
-      "imgs": course.imgs
-    });
-      if (response.statusCode == 200){
+      final response = await dio
+          .put('lesson.stevenpadilla.dev/course/api/v1/Courses', data: {
+        "id": course.id,
+        "title": course.title,
+        "description": course.description,
+        "exervisesIds": course.exercisesIds,
+        "testIds": course.testIds,
+        "topicsIds": course.topicsIds,
+        "imgs": course.imgs
+      });
+      if (response.statusCode == 200) {
         print("updated");
-      }else {
-      throw Exception('Server error');
-    }
+      } else {
+        throw Exception('Server error');
+      }
     } catch (e) {
       print('$e');
     }
@@ -78,7 +77,6 @@ class CourseRemoteDataSourceImpl implements CourseRemoteDataSource {
       response = await dio.post(api, data: data);
       final body = response.data;
       print(body);
-
     } catch (error) {
       print("error en funcion create Courses$error");
     }

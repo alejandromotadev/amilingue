@@ -14,14 +14,5 @@ class UserRepositoryImpl implements UserRepository {
   @override
   Future<void> createUser(UserEntity user) async =>
       userRemoteDataSource.createUser(user);
-  @override
-  Future<void> deleteUser(UserEntity user) async =>
-      UserRemoteDataSource.deleteUser(user);
 
-  @override
-  Stream<List<UserEntity>> getUser() => UserRemoteDataSource.getUser();
-
-  @override
-  Future<void> updateUser(UserEntity user) async =>
-      UserRemoteDataSource.updateUser(user);
 }

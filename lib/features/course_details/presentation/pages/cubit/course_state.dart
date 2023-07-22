@@ -10,7 +10,7 @@ class Loading extends CourseState{
 class Loaded extends CourseState{
 
   const Loaded(this.course);
-  final Stream<List<CourseEntity>> course;
+  final Future<List<dynamic>> course;
 }
 
 class Error extends CourseState{
