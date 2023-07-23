@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
                   ..getCourses()),
             BlocProvider(
                 create: (BuildContext context) => LessonCubit(
-                    getLessonUseCase: usecaseConfig.getLessonUsecase))
+                    getLessonUseCase: usecaseConfig.getLessonUsecase)),
           ],
           child: MaterialApp(
             title: 'Flutter Demo',

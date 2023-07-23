@@ -1,7 +1,7 @@
 import 'package:amilingue/features/authentication/domain/usecases/user_usecase.dart';
 import 'package:amilingue/features/authentication/presentation/cubit/Auth/auth_state.dart';
+import 'package:amilingue/features/authentication/presentation/cubit/Auth/splash_state.dart';
 import 'package:bloc/bloc.dart';
-import 'package:flutter/cupertino.dart';
 
 class AuthenticationCubit extends Cubit<AuthenticationState> {
   AuthenticationCubit(this._userUseCase) : super(AuthenticationState.none);
