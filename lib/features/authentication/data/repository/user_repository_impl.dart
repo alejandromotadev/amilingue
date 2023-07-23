@@ -7,7 +7,7 @@ class UserRepositoryImpl implements UserRepository {
   UserRepositoryImpl({required this.userRemoteDataSource});
 
   @override
-  Future<void> login(String email, String password) async {
+  Future<bool?> login(String email, String password) async {
     return userRemoteDataSource.login(email, password);
   }
 

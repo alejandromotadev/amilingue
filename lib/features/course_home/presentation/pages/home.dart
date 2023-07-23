@@ -60,7 +60,7 @@ class _HomeViewState extends State<HomeView> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  user == null ? '' : user["name"],
+                  user["name"] ?? "placeholder Name",
                   style: const TextStyle(
                     color: secondaryBackground,
                     fontSize: 18,
@@ -218,6 +218,7 @@ class _HomeViewState extends State<HomeView> {
                                         : secondaryBackground),
                                 const SizedBox(width: 5),
                                 Text(
+                                  //index["lesson_cant"]
                                   "lessons",
                                   style: TextStyle(
                                       color: state

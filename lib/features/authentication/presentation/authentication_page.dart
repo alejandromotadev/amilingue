@@ -40,6 +40,22 @@ class _AuthenticationViewState extends State<AuthenticationView> {
           if (state == AuthenticationState.authenticated) {
             Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (_) => const NavigationPage()));
+          } else if(state == AuthenticationState.none){
+            ScaffoldMessenger.of(context)
+                .showSnackBar(
+              const SnackBar(
+                backgroundColor: Colors.red,
+                content: Text(
+                  'Check your credentials',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight:
+                      FontWeight.w500,
+                      fontSize: 18),
+                ),
+              ),
+            );
           }
         },
         builder: (context, snapshot) {
@@ -162,8 +178,6 @@ class _AuthenticationViewState extends State<AuthenticationView> {
                                                       BorderRadius.circular(
                                                           10))),
                                           onPressed: () {
-                                            /* Navigator.of(context).pushReplacement(
-                                                  MaterialPageRoute(builder: (_) => const NavigationPage())); */
                                             if (emailController
                                                     .text.isNotEmpty ||
                                                 passwordController
