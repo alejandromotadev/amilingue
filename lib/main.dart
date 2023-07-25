@@ -8,10 +8,12 @@ import 'package:amilingue/features/profile/presentation/cubit/profile_cubit.dart
 import 'package:amilingue/utils/contants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 
 UsecaseConfig usecaseConfig = UsecaseConfig();
 void main() {
   runApp(const MyApp());
+  ControllerInjection.init();
 }
 
 class MyApp extends StatelessWidget {
@@ -44,7 +46,7 @@ class MyApp extends StatelessWidget {
                 create: (BuildContext context) => LessonCubit(
                     getLessonUseCase: usecaseConfig.getLessonUsecase)),
           ],
-          child: MaterialApp(
+          child: GetMaterialApp(
             title: 'Flutter Demo',
             debugShowCheckedModeBanner: false,
             theme: ThemeData(fontFamily: 'Fredoka'),

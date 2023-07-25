@@ -32,6 +32,7 @@ class _HomeViewState extends State<HomeView> {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     setState(() {
       user = jsonDecode(sharedPreferences.getString('user')!);
+      debugPrint("USER ====>  $user");
     });
   }
 
@@ -61,7 +62,7 @@ class _HomeViewState extends State<HomeView> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  user["name"] ?? "placeholder Name",
+                  user ?? "placeholder Name",
                   style: const TextStyle(
                     color: secondaryBackground,
                     fontSize: 18,

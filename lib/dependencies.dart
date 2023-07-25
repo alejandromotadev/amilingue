@@ -22,7 +22,9 @@ import 'package:amilingue/features/profile/data/datasources/profile_datasources.
 import 'package:amilingue/features/profile/data/datasources/profile_remote_datasource.dart';
 import 'package:amilingue/features/profile/data/repository/persistent_storage_repository_impl.dart';
 import 'package:amilingue/features/profile/domain/repository/repositories.dart';
+import 'package:amilingue/utils/network_controller.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 
 import 'features/course_details/data/datasources/cousese_remote_datasource_impl.dart';
 
@@ -62,4 +64,10 @@ List<RepositoryProvider> buildRepositories(){
     RepositoryProvider<UpdateCourseUseCase>(create: (context) => UpdateCourseUseCase(repository: courseRepository)),
     RepositoryProvider<CreateCourseUseCase>(create: (context) => CreateCourseUseCase(repository: courseRepository)),
   ];
+}
+
+class ControllerInjection{
+  static void init(){
+    Get.put<NetworkController>(NetworkController(),permanent: true);
+  }
 }
