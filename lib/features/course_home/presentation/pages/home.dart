@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:amilingue/Widgets/Categories/presentation/pages/category_box.dart';
 import 'package:amilingue/features/course_details/presentation/pages/course_details.dart';
+import 'package:amilingue/features/course_details/presentation/pages/course_details_screen.dart';
 import 'package:amilingue/features/course_details/presentation/pages/cubit/course_cubit.dart';
 import 'package:amilingue/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:amilingue/utils/contants.dart';
@@ -135,118 +136,121 @@ class _HomeViewState extends State<HomeView> {
 
   Widget getCourses() {
     return BlocBuilder<CourseCubit, CourseState>(builder: (context, state) {
-      final courseController = context.read<CourseCubit>();
+      if (state is Loaded) {
+        return BlocBuilder<AppThemeCubit, bool>(builder: (context, state) {
+          final courseController = context.read<CourseCubit>();
+          return CarouselSlider(
+              options: CarouselOptions(
+                  height: 190, enlargeCenterPage: true, disableCenter: true),
+              //courseController.courseList.map
+              items: courseController.courseList.map((course) {
 
-      return BlocBuilder<AppThemeCubit, bool>(builder: (context, state) {
-        return CarouselSlider(
-            options: CarouselOptions(
-                height: 190, enlargeCenterPage: true, disableCenter: true),
-            //courseController.courseList.map
-            items: courseController.courseList.map((index) {
-              return Builder(
-                builder: (BuildContext context) {
-                  return InkWell(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const CourseView()));
-                    },
-                    child: Container(
-                      width: 280,
-                      padding: const EdgeInsets.all(10),
-                      margin: const EdgeInsets.only(bottom: 5, top: 5),
-                      decoration: BoxDecoration(
-                          color: state ? darkmodebutton : buttonColor,
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: [
-                            BoxShadow(
-                                color: Colors.black.withOpacity(0.2),
-                                spreadRadius: 1,
-                                blurRadius: 1,
-                                offset: const Offset(1, 6))
-                          ]),
-                      child: Stack(
-                        children: [
-                          Container(
-                            width: double.infinity,
-                            height: 180,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(15)),
+                return Builder(
+                  builder: (BuildContext context) {
+                    return InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    CourseViewScreen(course: course,)));
+                      },
+                      child: Container(
+                        width: 280,
+                        padding: const EdgeInsets.all(10),
+                        margin: const EdgeInsets.only(bottom: 5, top: 5),
+                        decoration: BoxDecoration(
+                            color: state ? darkmodebutton : buttonColor,
+                            borderRadius: BorderRadius.circular(20),
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.black.withOpacity(0.2),
+                                  spreadRadius: 1,
+                                  blurRadius: 1,
+                                  offset: const Offset(1, 6))
+                            ]),
+                        child: Stack(
+                          children: [
+                            Container(
+                              width: double.infinity,
+                              height: 180,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15)),
+                              ),
                             ),
-                          ),
-                          Positioned(
-                            top: 10,
-                            left: 10,
-                            child: Container(
-                              width: 150,
-                              height: 50,
-                              padding: const EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                  color: state ? darkmodebutton : buttonColor,
-                                  borderRadius: BorderRadius.circular(15),
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: Colors.black.withOpacity(0.2),
-                                        spreadRadius: 1,
-                                        blurRadius: 1,
-                                        offset: const Offset(1, 4))
-                                  ]),
-                              child: Center(
-                                child: Text(
-                                  index["title"],
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
-                                      color: state
-                                          ? darkmodeTextColor
-                                          : primaryTextColor,
-                                      fontWeight: FontWeight.w600),
+                            Positioned(
+                              top: 10,
+                              left: 10,
+                              child: Container(
+                                width: 150,
+                                height: 50,
+                                padding: const EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                    color: state ? darkmodebutton : buttonColor,
+                                    borderRadius: BorderRadius.circular(15),
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Colors.black.withOpacity(0.2),
+                                          spreadRadius: 1,
+                                          blurRadius: 1,
+                                          offset: const Offset(1, 4))
+                                    ]),
+                                child: Center(
+                                  child: Text(
+                                    course["title"],
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                        color: state
+                                            ? darkmodeTextColor
+                                            : primaryTextColor,
+                                        fontWeight: FontWeight.w600),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          Positioned(
-                            top: 130,
-                            left: 10,
-                            child: Row(
-                              children: [
-                                Icon((Icons.play_circle_outline),
-                                    color: state
-                                        ? darkmodeSecondarycolor
-                                        : secondaryBackground),
-                                const SizedBox(width: 5),
-                                Text(
-                                  //index["lesson_cant"]
-                                  "lessons",
-                                  style: TextStyle(
+                            Positioned(
+                              top: 130,
+                              left: 10,
+                              child: Row(
+                                children: [
+                                  Icon((Icons.play_circle_outline),
                                       color: state
                                           ? darkmodeSecondarycolor
-                                          : secondaryBackground,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                                const SizedBox(width: 10),
-                                Text(
-                                  index["description"],
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
-                                      color: state
-                                          ? darkmodeSecondarycolor
-                                          : primaryTextColor),
-                                ),
-                              ],
+                                          : secondaryBackground),
+                                  const SizedBox(width: 5),
+                                  Text(
+                                    //index["lesson_cant"]
+                                    "lessons",
+                                    style: TextStyle(
+                                        color: state
+                                            ? darkmodeSecondarycolor
+                                            : secondaryBackground,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                  const SizedBox(width: 10),
+                                  Text(
+                                    course["description"],
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                        color: state
+                                            ? darkmodeSecondarycolor
+                                            : primaryTextColor),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  );
-                },
-              );
-            }).toList());
-      });
+                    );
+                  },
+                );
+              }).toList());
+        });
+      }else{return Container();}
     });
   }
 }

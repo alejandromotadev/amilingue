@@ -1,5 +1,5 @@
 import 'package:amilingue/features/course_details/domain/repository/course_repository.dart';
-import 'package:amilingue/features/course_details/domain/entity/course.dart';
+
 
 class GetCourseUseCase {
   final CourseRepository repository;

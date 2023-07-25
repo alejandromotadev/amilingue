@@ -4,16 +4,26 @@ abstract class CourseState{
 }
 
 class Loading extends CourseState{
-  const Loading();
+  @override
+  List<Object> get props => [];
 }
 
 class Loaded extends CourseState{
 
   const Loaded(this.course);
-  final Future<List<dynamic>> course;
+  final List<dynamic> course;
+
+  List<Object?> get props => [course];
 }
 
 class Error extends CourseState{
-  const Error(this.error);
-  final String error;
+  @override
+  List<Object> get props =>[];
+}
+
+class DetailState extends CourseState{
+  DetailState(this.course);
+  final CourseEntity course;
+  @override
+  List<Object> get props => [course];
 }
