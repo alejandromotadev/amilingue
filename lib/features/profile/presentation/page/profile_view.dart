@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:amilingue/features/authentication/presentation/authentication_page.dart';
+import 'package:amilingue/features/authentication/presentation/cubit/Auth/auth_cubit.dart';
+import 'package:amilingue/features/authentication/presentation/cubit/Auth/auth_state.dart';
 import 'package:amilingue/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:amilingue/utils/contants.dart';
 import 'package:flutter/material.dart';
@@ -87,7 +89,7 @@ class _ProfileViewState extends State<ProfileView> {
                         context.read<AppThemeCubit>().updateTheme(val);
                       });
                     }),
-                BlocListener<SettingsLogoutCubit, void>(
+                BlocListener<AuthenticationCubit, AuthenticationState>(
                   child: Container(
                     width: 200,
                     height: 50,
@@ -96,14 +98,7 @@ class _ProfileViewState extends State<ProfileView> {
                         ),
                     child: ElevatedButton(
                       onPressed: () {
-                        context.read<SettingsLogoutCubit>().logout();
-                        //TODO: REMOVER LA SIGUIENTE LINEA EN IMPLEMENTACION
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const AuthenticationView(),
-                          ),
-                        );
+                        context.read<AuthenticationCubit>().logoutCubit();
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.red,
@@ -116,8 +111,28 @@ class _ProfileViewState extends State<ProfileView> {
                     ),
                   ),
                   listener: (context, state) {
-                    //pushToPage(context, "/login");
-
+                    if(state == AuthenticationState.none){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const AuthenticationView(),
+                        ),
+                      );
+                    } else{
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          backgroundColor: Colors.red,
+                          content: Text(
+                            'Something happened',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 18),
+                          ),
+                        ),
+                      );
+                    }
                   },
                 ),
               ],

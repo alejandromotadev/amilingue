@@ -56,4 +56,11 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
       debugPrint("error UserRemoteDatasourcesImpl ====> $error");
     }
   }
+
+  @override
+  Future<void> logout() async{
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    await sharedPreferences.remove("user");
+    await sharedPreferences.remove("email");
+  }
 }

@@ -35,4 +35,13 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
       print("error authentication cubit ===> ${e}");
     }
   }
+
+  Future<void>logoutCubit()async{
+    try{
+      await _userUseCase.userRepository.logout();
+      emit(AuthenticationState.none);
+    } catch(e){
+      print("error authentication cubit ===> ${e}");
+    }
+  }
 }

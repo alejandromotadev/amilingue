@@ -15,4 +15,9 @@ class UserRepositoryImpl implements UserRepository {
   Future<bool?> createUser(String name, String username, String email, String password) async =>
       userRemoteDataSource.createUser(name, username, email, password);
 
+  @override
+  Future<void> logout() async {
+    userRemoteDataSource.logout();
+  }
+
 }
