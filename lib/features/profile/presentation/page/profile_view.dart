@@ -66,7 +66,7 @@ class _ProfileViewState extends State<ProfileView> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text( user["name"] ?? "placeholder name", style: TextStyle(color: state ? darkmodeTextColor : primaryTextColor ),),
+                        Text( user ?? "placeholder name", style: TextStyle(color: state ? darkmodeTextColor : primaryTextColor ),),
                       ],
                     ),
                     Row(
@@ -74,7 +74,7 @@ class _ProfileViewState extends State<ProfileView> {
                       children: [
                         const Icon(Icons.email, color: secondaryBackground,),
                         const SizedBox(width: 10),
-                        Text(user["email"] ?? "placeholder email", style: TextStyle(color: secondaryBackground ),),
+                        Text(email ?? "placeholder email", style: TextStyle(color: secondaryBackground ),),
                       ],
                     ),
 
