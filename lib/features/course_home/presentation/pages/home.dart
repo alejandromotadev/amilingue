@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:amilingue/Widgets/Categories/presentation/pages/category_box.dart';
-import 'package:amilingue/features/course_details/presentation/pages/course_details.dart';
+
 import 'package:amilingue/features/course_details/presentation/pages/course_details_screen.dart';
 import 'package:amilingue/features/course_details/presentation/pages/cubit/course_cubit.dart';
 import 'package:amilingue/features/profile/presentation/cubit/profile_cubit.dart';
@@ -138,6 +138,7 @@ class _HomeViewState extends State<HomeView> {
   Widget getCourses() {
     return BlocBuilder<CourseCubit, CourseState>(builder: (context, state) {
       if (state is Loaded) {
+        
         return BlocBuilder<AppThemeCubit, bool>(builder: (context, state) {
           final courseController = context.read<CourseCubit>();
           return CarouselSlider(

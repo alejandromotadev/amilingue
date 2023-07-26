@@ -1,6 +1,7 @@
 
 import 'package:amilingue/features/course_details/presentation/pages/cubit/course_cubit.dart';
-import 'package:amilingue/features/excersices/study_screen1.dart';
+import 'package:amilingue/features/excersices/presentation/pages/study_screen1.dart';
+import 'package:amilingue/features/excersices/presentation/pages/study_screen2.dart';
 import 'package:amilingue/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:amilingue/utils/contants.dart';
 import 'package:amilingue/utils/data.dart';
@@ -109,7 +110,7 @@ class _CourseViewScreenState extends State<CourseViewScreen> {
                             borderRadius: BorderRadius.circular(10))),
                     onPressed: () {
                       Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (_) => const Study_Screen1()));
+                          builder: (_) => const Study_Screen2()));
                     },
                     child: Text(
                       "Study",

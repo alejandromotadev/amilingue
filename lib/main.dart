@@ -3,6 +3,7 @@ import 'package:amilingue/dependencies.dart';
 import 'package:amilingue/features/authentication/presentation/authentication_page.dart';
 import 'package:amilingue/features/authentication/presentation/cubit/Auth/auth_cubit.dart';
 import 'package:amilingue/features/course_details/presentation/pages/cubit/course_cubit.dart';
+import 'package:amilingue/features/excersices/presentation/cubit/exercise_cubit.dart';
 import 'package:amilingue/features/lessons/presentation/pages/cubit/lessons_cubit.dart';
 import 'package:amilingue/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:amilingue/utils/contants.dart';
@@ -45,6 +46,9 @@ class MyApp extends StatelessWidget {
             BlocProvider(
                 create: (BuildContext context) => LessonCubit(
                     getLessonUseCase: usecaseConfig.getLessonUsecase)),
+          BlocProvider(
+                create: (BuildContext context) => ExerciseCubit(
+                    getExerciseUseCase: usecaseConfig.getExerciseUsecase)..getExcercises()),
           ],
           child: GetMaterialApp(
             title: 'Flutter Demo',

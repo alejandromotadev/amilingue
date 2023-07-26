@@ -1,8 +1,7 @@
 import 'package:amilingue/features/course_details/data/datasources/course_remote_datasource.dart';
-import 'package:amilingue/features/course_details/data/models/course_model.dart';
 import 'package:amilingue/features/course_details/domain/entity/course.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
+
 
 class CourseRemoteDataSourceImpl implements CourseRemoteDataSource {
   @override

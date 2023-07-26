@@ -10,6 +10,11 @@ import 'package:amilingue/features/course_details/domain/usescases/create_course
 import 'package:amilingue/features/course_details/domain/usescases/delete_course_usecases.dart';
 import 'package:amilingue/features/course_details/domain/usescases/get_courses_usecase.dart';
 import 'package:amilingue/features/course_details/domain/usescases/update_courses_usecase.dart';
+import 'package:amilingue/features/excersices/data/datasources/exercise_remote_datasource.dart';
+import 'package:amilingue/features/excersices/data/datasources/exercise_remote_datasource_impl.dart';
+import 'package:amilingue/features/excersices/data/repository/exercise_repositiry_impl.dart';
+import 'package:amilingue/features/excersices/domain/repository/exercise_repository.dart';
+import 'package:amilingue/features/excersices/domain/usescases/get_exercise_usecase.dart';
 import 'package:amilingue/features/lessons/data/datasources/lesson_remote_datasource.dart';
 import 'package:amilingue/features/lessons/data/datasources/lesson_remote_datasource_impl.dart';
 import 'package:amilingue/features/lessons/data/repository/lesson_repositiry_impl.dart';
@@ -29,15 +34,21 @@ import 'package:get/get.dart';
 import 'features/course_details/data/datasources/cousese_remote_datasource_impl.dart';
 
 List<RepositoryProvider> buildRepositories(){
+  // RemotesDataSources
   final UserRemoteDataSource userRemoteDataSourceImpl = UserRemoteDataSourceImpl();
   final CourseRemoteDataSource courseRemoteDataSourceImpl = CourseRemoteDataSourceImpl();
+  final ExerciseRemoteDataSource exerciseRemoteDataSourceImpl = ExerciseRemoteDataSourceImpl();
   final PersistentStorageRemoteDataSource persistentStorageRemoteDataSourceImpl = PersistentStorageDataSourcesImpl();
+  //RemotesDataSourcesImpl
   final LessonRemoteDataSource lessonRemoteDataSource = LessonRemoteDataSourceImpl();
-    final CourseRemoteDataSource courseRemoteDataSource = CourseRemoteDataSourceImpl();
+  final CourseRemoteDataSource courseRemoteDataSource = CourseRemoteDataSourceImpl();
+  final ExerciseRemoteDataSource exerciseRemoteDataSource = ExerciseRemoteDataSourceImpl();
+  //Repositorys
   final LessonRepository lessonRepository = LessonRepositoryImpl(lessonRemoteDataSource: lessonRemoteDataSource);
   final CourseRepository courseRepository = CourseRepositoryImpl(courseRemoteDataSource: courseRemoteDataSource);
-
+  final ExerciseRepository exerciseRepository = ExerciseRepositoryImpl(exerciseRemoteDataSource: exerciseRemoteDataSource);
   return[
+    //Repositorys providers
     RepositoryProvider<UserRemoteDataSource>(create: (context)=> UserRemoteDataSourceImpl()),
     RepositoryProvider<UserRepository>(create: (context) => UserRepositoryImpl(userRemoteDataSource: userRemoteDataSourceImpl)),
 
@@ -50,6 +61,8 @@ List<RepositoryProvider> buildRepositories(){
     RepositoryProvider<LessonRemoteDataSource>(create: (context)=> LessonRemoteDataSourceImpl()),
     RepositoryProvider<LessonRepository>(create: (context) =>LessonRepositoryImpl(lessonRemoteDataSource: lessonRemoteDataSource)),
 
+    RepositoryProvider<ExerciseRemoteDataSource>(create: (context)=> ExerciseRemoteDataSourceImpl()),
+    RepositoryProvider<ExerciseRepository>(create: (context) =>ExerciseRepositoryImpl(exerciseRemoteDataSource: exerciseRemoteDataSourceImpl)),
 
 
 
@@ -63,6 +76,7 @@ List<RepositoryProvider> buildRepositories(){
     RepositoryProvider<DeleteCourseUseCase>(create: (context) => DeleteCourseUseCase(repository: courseRepository)),
     RepositoryProvider<UpdateCourseUseCase>(create: (context) => UpdateCourseUseCase(repository: courseRepository)),
     RepositoryProvider<CreateCourseUseCase>(create: (context) => CreateCourseUseCase(repository: courseRepository)),
+    RepositoryProvider<GetExerciseUseCase>(create: (context) => GetExerciseUseCase(repository: exerciseRepository)),
   ];
 }
 

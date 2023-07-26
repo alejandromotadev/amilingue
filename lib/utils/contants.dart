@@ -6,6 +6,9 @@ import 'package:amilingue/features/course_details/domain/usescases/create_course
 import 'package:amilingue/features/course_details/domain/usescases/delete_course_usecases.dart';
 import 'package:amilingue/features/course_details/domain/usescases/get_courses_usecase.dart';
 import 'package:amilingue/features/course_details/domain/usescases/update_courses_usecase.dart';
+import 'package:amilingue/features/excersices/data/datasources/exercise_remote_datasource_impl.dart';
+import 'package:amilingue/features/excersices/data/repository/exercise_repositiry_impl.dart';
+import 'package:amilingue/features/excersices/domain/usescases/get_exercise_usecase.dart';
 import 'package:amilingue/features/lessons/data/datasources/lesson_remote_datasource_impl.dart';
 import 'package:amilingue/features/lessons/data/repository/lesson_repositiry_impl.dart';
 import 'package:amilingue/features/lessons/domain/usescases/get_lesson_usecase.dart';
@@ -69,6 +72,7 @@ class ButtonConstant extends StatelessWidget {
 class UsecaseConfig {
   late GetLessonUseCase getLessonUsecase;
   late GetCourseUseCase getCourseUsecase;
+  late GetExerciseUseCase getExerciseUsecase;
   late CreateCourseUseCase createCourseUsecase;
   late UpdateCourseUseCase updateCourseUsecase;
   late DeleteCourseUseCase deleteCourseUsecase;
@@ -76,13 +80,19 @@ class UsecaseConfig {
   late CourseRemoteDataSourceImpl courseRemoteDataSourceImpl;
   late LessonRepositoryImpl lessonRepositoryImpl;
   late LessonRemoteDataSourceImpl lessonRemoteDataSourceImpl;
+  late ExerciseRepositoryImpl exerciseRepositoryImpl;
+  late ExerciseRemoteDataSourceImpl exerciseRemoteDataSourceImpl;
 
   UsecaseConfig() {
+    //Declaración de implementaciones
     courseRemoteDataSourceImpl = CourseRemoteDataSourceImpl();
     courseRepositoryImpl = CourseRepositoryImpl(courseRemoteDataSource: courseRemoteDataSourceImpl);
     lessonRemoteDataSourceImpl = LessonRemoteDataSourceImpl();
     lessonRepositoryImpl = LessonRepositoryImpl(lessonRemoteDataSource: lessonRemoteDataSourceImpl);
-
+    exerciseRemoteDataSourceImpl = ExerciseRemoteDataSourceImpl();
+    exerciseRepositoryImpl = ExerciseRepositoryImpl(exerciseRemoteDataSource: exerciseRemoteDataSourceImpl);
+    //Usecases
+    getExerciseUsecase = GetExerciseUseCase( repository: exerciseRepositoryImpl);
     getCourseUsecase = GetCourseUseCase( repository: courseRepositoryImpl);
     createCourseUsecase = CreateCourseUseCase(repository: courseRepositoryImpl);
     updateCourseUsecase = UpdateCourseUseCase(repository: courseRepositoryImpl);

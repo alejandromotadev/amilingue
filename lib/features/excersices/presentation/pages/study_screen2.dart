@@ -2,15 +2,17 @@ import 'dart:math';
 
 import 'package:amilingue/features/course_details/data/models/course_model.dart';
 import 'package:amilingue/features/course_details/domain/entity/course.dart';
+import 'package:amilingue/features/excersices/presentation/cubit/exercise_cubit.dart';
 import 'package:amilingue/utils/contants.dart';
 import 'package:amilingue/utils/data.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
-import '../lessons/data/models/lesson_model.dart';
-import '../lessons/domain/entity/lessons.dart';
+import '../../../lessons/data/models/lesson_model.dart';
+import '../../../lessons/domain/entity/lessons.dart';
 
 // ignore: camel_case_types
 class Study_Screen2 extends StatefulWidget {
@@ -94,7 +96,17 @@ class _Study_Screen2State extends State<Study_Screen2> {
     List<Map<String, String>> listaDesordenada = List.from(listaSimulada);
     listaDesordenada.shuffle(Random());
 
-    return Scaffold(
+    return BlocBuilder<ExerciseCubit, ExerciseState>(builder: (context, state){
+      if(state is Loading){
+        return Center(child: CircularProgressIndicator(),);
+      }
+      if(state is Error){
+        print("error maldita sea");
+      }
+      if(state is Loaded){
+        final exerciseController = context.read<ExerciseCubit>();
+        return Scaffold(
+          
         backgroundColor: primaryBackground,
         appBar: AppBar(
           leading: IconButton(
@@ -142,9 +154,9 @@ class _Study_Screen2State extends State<Study_Screen2> {
                         physics: NeverScrollableScrollPhysics(),
                         scrollDirection: Axis.vertical,
                         shrinkWrap: true,
-                        itemCount: listaSimulada.length,
+                        itemCount: exerciseController.exerciseList.length,
                         itemBuilder: (context, index) {
-                          final item = listaSimulada[index];
+                          final item = exerciseController.exerciseList[index];
                           return Card(
                               key: ValueKey(item['id']),
                               shape: RoundedRectangleBorder(
@@ -196,9 +208,9 @@ class _Study_Screen2State extends State<Study_Screen2> {
                         physics: NeverScrollableScrollPhysics(),
                         scrollDirection: Axis.vertical,
                         shrinkWrap: true,
-                        itemCount: listaSimulada2.length,
+                        itemCount: exerciseController.exerciseList.length,
                         itemBuilder: (context, index) {
-                          final items = listaSimulada2[index];
+                          final items = exerciseController.exerciseList[index];
                           return Card(
                               key: ValueKey(items['id']),
                               shape: RoundedRectangleBorder(
@@ -220,8 +232,8 @@ class _Study_Screen2State extends State<Study_Screen2> {
                             if (newIndex > oldIndex) {
                               newIndex -= 1;
                             }
-                            final item = listaSimulada2.removeAt(oldIndex);
-                            listaSimulada2.insert(newIndex, item);
+                            final item = exerciseController.exerciseList.removeAt(oldIndex);
+                            exerciseController.exerciseList.insert(newIndex, item);
                           });
                         },
                       ),
@@ -245,7 +257,7 @@ class _Study_Screen2State extends State<Study_Screen2> {
                       ),
                     ),
                     onPressed: () {
-debugPrint(listCourses().toString());},
+debugPrint(exerciseController.exerciseList.toString());},
                     child: const Text(
                       "Check",
                       style: TextStyle(fontWeight: FontWeight.w800),
@@ -257,5 +269,12 @@ debugPrint(listCourses().toString());},
             )),
           ),
         ));
+      }else{
+        return Container(child: Text("Hola", style: TextStyle(color: Colors.white),),);
+      }
+
+    }
+
+    );}
   }
-}
+

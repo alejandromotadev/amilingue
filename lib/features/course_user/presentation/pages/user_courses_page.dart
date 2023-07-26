@@ -1,4 +1,5 @@
-import 'package:amilingue/features/course_details/presentation/pages/course_details.dart';
+
+import 'package:amilingue/features/course_details/presentation/pages/course_details_screen.dart';
 import 'package:amilingue/features/course_details/presentation/pages/cubit/course_cubit.dart';
 import 'package:amilingue/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:amilingue/utils/contants.dart';
@@ -145,7 +146,7 @@ class _CoursesViewState extends State<CoursesView> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const CourseView()));
+                            builder: (context) => const CourseViewScreen()));
                   },
                   child: Container(
                     width: 280,
