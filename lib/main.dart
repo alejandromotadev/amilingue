@@ -4,6 +4,7 @@ import 'package:amilingue/features/authentication/presentation/authentication_pa
 import 'package:amilingue/features/authentication/presentation/cubit/Auth/auth_cubit.dart';
 import 'package:amilingue/features/course_details/presentation/pages/cubit/course_cubit.dart';
 import 'package:amilingue/features/excersices/presentation/cubit/exercise_cubit.dart';
+import 'package:amilingue/features/excersices/presentation/pages/study_screen2.dart';
 import 'package:amilingue/features/lessons/presentation/pages/cubit/lessons_cubit.dart';
 import 'package:amilingue/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:amilingue/utils/contants.dart';
