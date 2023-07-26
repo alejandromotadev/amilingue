@@ -14,7 +14,7 @@ class ExerciseCubit extends Cubit<ExerciseState> {
   Future<void> getExcercises() async {
     emit( Loading());
     try {
-      final exercisesFuture = getExerciseUseCase.call();
+      final exercisesFuture = await getExerciseUseCase.call();
       final exercises = await exercisesFuture;
       exerciseList = exercises;
       emit(Loaded(exerciseList)); // Emite la lista cargada después de obtenerla.

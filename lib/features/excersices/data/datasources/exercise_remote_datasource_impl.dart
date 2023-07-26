@@ -9,7 +9,7 @@ class ExerciseRemoteDataSourceImpl implements ExerciseRemoteDataSource {
   Future<List> getExercise() async {
     final dio = Dio();
     final response =
-        await dio.get('exercise.stevenpadilla.dev/api/v1/exercise');
+        await dio.get('https://exercise.stevenpadilla.dev/api/v1/exercise');
     if (response.statusCode == 200) {
       return response.data;
     } else {

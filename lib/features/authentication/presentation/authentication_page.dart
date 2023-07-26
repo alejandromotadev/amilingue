@@ -51,270 +51,268 @@ class _AuthenticationViewState extends State<AuthenticationView> {
       );
     }
 
-    return BlocBuilder<CourseCubit, CourseState>(builder: (context, state) {
-      return BlocConsumer<AuthenticationCubit, AuthenticationState>(
-        listener: (context, state) {
-          if (state == AuthenticationState.authenticated) {
-            Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (_) => const NavigationPage()));
-          } else if (state == AuthenticationState.none) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                backgroundColor: Colors.red,
-                content: Text(
-                  'Check your credentials',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 18),
-                ),
-              ),
-            );
-          }
-        },
-        builder: (context, snapshot) {
-          final bloc = context.read<AuthenticationCubit>();
-
-          return SafeArea(
-            child: Scaffold(
-              backgroundColor: secondaryBackground,
-              body: Center(
-                child: Column(
-                  children: [
-                    Flexible(
-                      fit: FlexFit.tight,
-                      flex: 2,
-                      child: Image.asset("assets/ic_launcher_foreground.png"),
-                    ),
-                    Flexible(
-                      fit: FlexFit.loose,
-                      flex: 5,
-                      child: Container(
-                        height: double.maxFinite,
-                        width: 380,
-                        decoration: const BoxDecoration(
-                            color: primaryBackground,
-                            borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(40),
-                                topLeft: Radius.circular(40))),
-                        child: LayoutBuilder(
-                          builder: (BuildContext context,
-                              BoxConstraints viewportConstraints) {
-                            return SingleChildScrollView(
-                              child: ConstrainedBox(
-                                constraints: BoxConstraints(
-                                  minHeight: viewportConstraints.maxHeight,
-                                ),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    if (!isLogin)
-                                      Column(
-                                        children: [
-                                          const SizedBox(height: 20,),
-                                          Container(
-                                            width: 300,
-                                            decoration: BoxDecoration(
-                                                color: buttonColor,
-                                                borderRadius:
-                                                    BorderRadius.circular(15),
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: Colors.black
-                                                        .withOpacity(0.2),
-                                                    offset: Offset(0, 2),
-                                                    blurRadius: 1,
-                                                    spreadRadius: 1,
-                                                  )
-                                                ]),
-                                            child: TextField(
-                                              controller: nameController,
-                                              keyboardType: TextInputType.name,
-                                              decoration: const InputDecoration(
-                                                  border: InputBorder.none,
-                                                  hintText: ('NAME'),
-                                                  prefixIcon: Icon(Icons.person,
-                                                      color:
-                                                          secondaryBackground)),
-                                              textInputAction:
-                                                  TextInputAction.next,
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            height: 30,
-                                          ),
-                                          Container(
-                                            width: 300,
-                                            decoration: BoxDecoration(
-                                                color: buttonColor,
-                                                borderRadius:
-                                                BorderRadius.circular(15),
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: Colors.black
-                                                        .withOpacity(0.2),
-                                                    offset: Offset(0, 2),
-                                                    blurRadius: 1,
-                                                    spreadRadius: 1,
-                                                  )
-                                                ]),
-                                            child: TextField(
-                                              controller: usernameController,
-                                              keyboardType: TextInputType.name,
-                                              decoration: const InputDecoration(
-                                                  border: InputBorder.none,
-                                                  hintText: ('USERNAME'),
-                                                  prefixIcon: Icon(Icons.person,
-                                                      color:
-                                                      secondaryBackground)),
-                                              textInputAction:
-                                              TextInputAction.next,
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            height: 30,
-                                          ),
-                                        ],
-                                      ),
-                                    Container(
-                                      width: 300,
-                                      decoration: BoxDecoration(
-                                          color: buttonColor,
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color:
-                                                  Colors.black.withOpacity(0.2),
-                                              offset: Offset(0, 2),
-                                              blurRadius: 1,
-                                              spreadRadius: 1,
-                                            )
-                                          ]),
-                                      child: TextField(
-                                        controller: emailController,
-                                        keyboardType: TextInputType.emailAddress,
-                                        decoration: const InputDecoration(
-                                            border: InputBorder.none,
-                                            hintText: ('EMAIL'),
-                                            prefixIcon: Icon(Icons.email,
-                                                color: secondaryBackground)),
-                                        textInputAction: TextInputAction.next,
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      height: 30,
-                                    ),
-                                    Container(
-                                      width: 300,
-                                      decoration: BoxDecoration(
-                                          color: primaryBackground,
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color:
-                                                  Colors.black.withOpacity(0.2),
-                                              offset: Offset(0, 2),
-                                              blurRadius: 1,
-                                              spreadRadius: 1,
-                                            )
-                                          ]),
-                                      child: TextField(
-                                        controller: passwordController,
-                                        keyboardType: TextInputType.visiblePassword,
-                                        decoration: const InputDecoration(
-                                            border: InputBorder.none,
-                                            hintText: ('PASSWORD'),
-                                            prefixIcon: Icon(Icons.lock,
-                                                color: secondaryBackground)),
-                                        textInputAction: TextInputAction.done,
-                                        obscureText: true,
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      height: 50,
-                                    ),
-                                    Container(
-                                      width: 300,
-                                      height: 60,
-                                      decoration: BoxDecoration(
-                                          color: secondaryBackground,
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color:
-                                                  Colors.black.withOpacity(0.2),
-                                              spreadRadius: 1,
-                                              offset: Offset(0, 4),
-                                              blurRadius: 1,
-                                            )
-                                          ]),
-                                      child: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                            backgroundColor:
-                                                secondaryBackground,
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(10))),
-                                        onPressed: () {
-                                          if (emailController.text.isNotEmpty ||
-                                              passwordController
-                                                  .text.isNotEmpty) {
-                                            isLogin
-                                                ? bloc.loginCubit(
-                                                    emailController.text,
-                                                    passwordController.text)
-                                                : bloc.registerCubit(
-                                                    nameController.text,
-                                                    usernameController.text,
-                                                    emailController.text,
-                                                    passwordController.text);
-                                          } else {
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(
-                                              const SnackBar(
-                                                backgroundColor: Colors.red,
-                                                content: Text(
-                                                  'FILL FIELDS',
-                                                  textAlign: TextAlign.center,
-                                                  style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontSize: 18),
-                                                ),
-                                              ),
-                                            );
-                                          }
-                                        },
-                                        child: Text(
-                                          isLogin ? "SIGN IN" : "SIGN UP",
-                                          style: TextStyle(color: Colors.white),
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                    _loginOrRegisterButton()
-                                  ],
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                    )
-                  ],
-                ),
+    return BlocConsumer<AuthenticationCubit, AuthenticationState>(
+      listener: (context, state) {
+        if (state == AuthenticationState.authenticated) {
+          Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (_) => const NavigationPage()));
+        } else if (state == AuthenticationState.none) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              backgroundColor: Colors.red,
+              content: Text(
+                'Check your credentials',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 18),
               ),
             ),
           );
-        },
-      );
-    });
+        }
+      },
+      builder: (context, snapshot) {
+        final bloc = context.read<AuthenticationCubit>();
+
+        return SafeArea(
+          child: Scaffold(
+            backgroundColor: secondaryBackground,
+            body: Center(
+              child: Column(
+                children: [
+                  Flexible(
+                    fit: FlexFit.tight,
+                    flex: 2,
+                    child: Image.asset("assets/ic_launcher_foreground.png"),
+                  ),
+                  Flexible(
+                    fit: FlexFit.loose,
+                    flex: 5,
+                    child: Container(
+                      height: double.maxFinite,
+                      width: 380,
+                      decoration: const BoxDecoration(
+                          color: primaryBackground,
+                          borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(40),
+                              topLeft: Radius.circular(40))),
+                      child: LayoutBuilder(
+                        builder: (BuildContext context,
+                            BoxConstraints viewportConstraints) {
+                          return SingleChildScrollView(
+                            child: ConstrainedBox(
+                              constraints: BoxConstraints(
+                                minHeight: viewportConstraints.maxHeight,
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  if (!isLogin)
+                                    Column(
+                                      children: [
+                                        const SizedBox(height: 20,),
+                                        Container(
+                                          width: 300,
+                                          decoration: BoxDecoration(
+                                              color: buttonColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.black
+                                                      .withOpacity(0.2),
+                                                  offset: Offset(0, 2),
+                                                  blurRadius: 1,
+                                                  spreadRadius: 1,
+                                                )
+                                              ]),
+                                          child: TextField(
+                                            controller: nameController,
+                                            keyboardType: TextInputType.name,
+                                            decoration: const InputDecoration(
+                                                border: InputBorder.none,
+                                                hintText: ('NAME'),
+                                                prefixIcon: Icon(Icons.person,
+                                                    color:
+                                                        secondaryBackground)),
+                                            textInputAction:
+                                                TextInputAction.next,
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 30,
+                                        ),
+                                        Container(
+                                          width: 300,
+                                          decoration: BoxDecoration(
+                                              color: buttonColor,
+                                              borderRadius:
+                                              BorderRadius.circular(15),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.black
+                                                      .withOpacity(0.2),
+                                                  offset: Offset(0, 2),
+                                                  blurRadius: 1,
+                                                  spreadRadius: 1,
+                                                )
+                                              ]),
+                                          child: TextField(
+                                            controller: usernameController,
+                                            keyboardType: TextInputType.name,
+                                            decoration: const InputDecoration(
+                                                border: InputBorder.none,
+                                                hintText: ('USERNAME'),
+                                                prefixIcon: Icon(Icons.person,
+                                                    color:
+                                                    secondaryBackground)),
+                                            textInputAction:
+                                            TextInputAction.next,
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 30,
+                                        ),
+                                      ],
+                                    ),
+                                  Container(
+                                    width: 300,
+                                    decoration: BoxDecoration(
+                                        color: buttonColor,
+                                        borderRadius:
+                                            BorderRadius.circular(15),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color:
+                                                Colors.black.withOpacity(0.2),
+                                            offset: Offset(0, 2),
+                                            blurRadius: 1,
+                                            spreadRadius: 1,
+                                          )
+                                        ]),
+                                    child: TextField(
+                                      controller: emailController,
+                                      keyboardType: TextInputType.emailAddress,
+                                      decoration: const InputDecoration(
+                                          border: InputBorder.none,
+                                          hintText: ('EMAIL'),
+                                          prefixIcon: Icon(Icons.email,
+                                              color: secondaryBackground)),
+                                      textInputAction: TextInputAction.next,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 30,
+                                  ),
+                                  Container(
+                                    width: 300,
+                                    decoration: BoxDecoration(
+                                        color: primaryBackground,
+                                        borderRadius:
+                                            BorderRadius.circular(15),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color:
+                                                Colors.black.withOpacity(0.2),
+                                            offset: Offset(0, 2),
+                                            blurRadius: 1,
+                                            spreadRadius: 1,
+                                          )
+                                        ]),
+                                    child: TextField(
+                                      controller: passwordController,
+                                      keyboardType: TextInputType.visiblePassword,
+                                      decoration: const InputDecoration(
+                                          border: InputBorder.none,
+                                          hintText: ('PASSWORD'),
+                                          prefixIcon: Icon(Icons.lock,
+                                              color: secondaryBackground)),
+                                      textInputAction: TextInputAction.done,
+                                      obscureText: true,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 50,
+                                  ),
+                                  Container(
+                                    width: 300,
+                                    height: 60,
+                                    decoration: BoxDecoration(
+                                        color: secondaryBackground,
+                                        borderRadius:
+                                            BorderRadius.circular(15),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color:
+                                                Colors.black.withOpacity(0.2),
+                                            spreadRadius: 1,
+                                            offset: Offset(0, 4),
+                                            blurRadius: 1,
+                                          )
+                                        ]),
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          backgroundColor:
+                                              secondaryBackground,
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10))),
+                                      onPressed: () {
+                                        if (emailController.text.isNotEmpty ||
+                                            passwordController
+                                                .text.isNotEmpty) {
+                                          isLogin
+                                              ? bloc.loginCubit(
+                                                  emailController.text,
+                                                  passwordController.text)
+                                              : bloc.registerCubit(
+                                                  nameController.text,
+                                                  usernameController.text,
+                                                  emailController.text,
+                                                  passwordController.text);
+                                        } else {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            const SnackBar(
+                                              backgroundColor: Colors.red,
+                                              content: Text(
+                                                'FILL FIELDS',
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontWeight:
+                                                        FontWeight.w500,
+                                                    fontSize: 18),
+                                              ),
+                                            ),
+                                          );
+                                        }
+                                      },
+                                      child: Text(
+                                        isLogin ? "SIGN IN" : "SIGN UP",
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  _loginOrRegisterButton()
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
   }
 }
