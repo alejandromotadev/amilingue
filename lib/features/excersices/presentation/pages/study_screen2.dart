@@ -24,33 +24,34 @@ class Study_Screen2 extends StatefulWidget {
 
 class _Study_Screen2State extends State<Study_Screen2> {
   var courseList;
+
   List<Map<String, String>> listaSimulada = [
     {
       'id': '1',
-      'texto': 'Usecase',
+      'texto': 'Compile the code',
     },
     {
       'id': '2',
-      'texto': 'Code',
+      'texto': 'Optimize the algorithm',
     },
     {
       'id': '3',
-      'texto': 'Error',
+      'texto': 'Debug the software',
     },
     // Agrega más elementos según sea necesario
   ];
   List<Map<String, String>> listaSimulada2 = [
     {
       'id': '1',
-      'texto': 'Usecase',
+      'texto': 'Transform source code to machine code',
     },
     {
       'id': '2',
-      'texto': 'Code',
+      'texto': 'Make the program more efficient',
     },
     {
       'id': '3',
-      'texto': 'Error',
+      'texto': 'Identify and fix errors in the program',
     },
     // Agrega más elementos según sea necesario
   ];
@@ -61,23 +62,15 @@ class _Study_Screen2State extends State<Study_Screen2> {
       listaSimulada2.sort();
     });
   }
-   Stream<List<CourseEntity>> getCourse(CourseEntity course) async* {
-    final dio = Dio();
-    final response =
-        await dio.get('http://44.212.243.195/api-docs/course/api/v1/course');
 
-    if (response.statusCode == 200) {
-            courseList = response;
-    } else {
-      throw Exception('Failed to fetch Courses');
+  List<Map<String, dynamic>>? listCourses() {
+    if (courseList != null && courseList["data"] != null) {
+      return (courseList["data"] as List)
+          .map((e) => e as Map<String, dynamic>)
+          .toList();
     }
   }
 
-  List<Map<String, dynamic>>? listCourses(){
-    if(courseList != null && courseList["data"] != null ){
-      return (courseList["data"] as List).map((e) => e as Map<String, dynamic>).toList();
-    }
-  }
   // This method set the new index to the element.
   void reorderData(int oldindex, int newindex) {
     setState(() {
@@ -96,185 +89,189 @@ class _Study_Screen2State extends State<Study_Screen2> {
     List<Map<String, String>> listaDesordenada = List.from(listaSimulada);
     listaDesordenada.shuffle(Random());
 
-    return BlocBuilder<ExerciseCubit, ExerciseState>(builder: (context, state){
-      if(state is Loading){
-        return Center(child: CircularProgressIndicator(),);
+    return BlocBuilder<ExerciseCubit, ExerciseState>(builder: (context, state) {
+      final exerciseController = context.read<ExerciseCubit>();
+
+      if (state is Loading) {
+        return Center(
+          child: CircularProgressIndicator(),
+        );
       }
-      if(state is Error){
+      if (state is Error) {
         print("error maldita sea");
       }
-      if(state is Loaded){
-        final exerciseController = context.read<ExerciseCubit>();
+      if (state is Loaded) {
         return Scaffold(
-          
-        backgroundColor: primaryBackground,
-        appBar: AppBar(
-          leading: IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.arrow_back,
-                color: secondaryBackground,
-                size: 36,
-              )),
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              LinearPercentIndicator(
-                width: 290.0,
-                lineHeight: 10.0,
-                percent: 0.5,
-                backgroundColor: secondaryBackground,
-                progressColor: checkColor,
-                barRadius: Radius.circular(60.00),
+            backgroundColor: primaryBackground,
+            appBar: AppBar(
+              forceMaterialTransparency: true,
+              leading: IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.arrow_back,
+                    color: secondaryBackground,
+                    size: 36,
+                  )),
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  LinearPercentIndicator(
+                    width: 290.0,
+                    lineHeight: 10.0,
+                    percent: 0.5,
+                    backgroundColor: secondaryBackground,
+                    progressColor: checkColor,
+                    barRadius: Radius.circular(60.00),
+                  ),
+                ],
               ),
-            ],
-          ),
-        ),
-        body: Material(
-          child: SingleChildScrollView(
-            child: Center(
-              
-                child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  "Complete the sentences",
-                  style: TextStyle(
-                      color: secondaryBackground,
-                      fontSize: 24,
-                      fontWeight: FontWeight.w800),
-                ),
-                Row(
-
-                  children: [
-                    Container(
-                      width: 170,
-                      height: 210,
-                      child: ListView.builder(
-                        physics: NeverScrollableScrollPhysics(),
-                        scrollDirection: Axis.vertical,
-                        shrinkWrap: true,
-                        itemCount: exerciseController.exerciseList.length,
-                        itemBuilder: (context, index) {
-                          final item = exerciseController.exerciseList[index];
-                          return Card(
+            ),
+            body: Padding(
+              padding: const EdgeInsets.symmetric(horizontal:10, vertical: 20),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+              const Text(
+                "Complete the sentences",
+                style: TextStyle(
+                    color: secondaryBackground,
+                    fontSize: 24,
+                    fontWeight: FontWeight.w800),
+              ),
+              Row(
+                children: [
+                  Container(
+                    width: 170,
+                    height: 210,
+                    child: ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      itemCount: listaSimulada.length,
+                      itemBuilder: (context, index) {
+                        final item = listaSimulada[index];
+                        return Card(
+                            key: ValueKey(item['id']),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            elevation: 4,
+                            child: ListTile(
                               key: ValueKey(item['id']),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
+                              title: Text(
+                                item['texto'].toString(),
+                                textAlign: TextAlign.center,
                               ),
-                              elevation: 4,
-                              child: ListTile(
-                                key: ValueKey(item['id']),
-                                title: Text(
-                                  item['texto'].toString(),
-                                  textAlign: TextAlign.center,
-                                ),
-                                contentPadding: EdgeInsets.symmetric(
-                                    vertical: 2, horizontal: 16),
-                              ));
-                        },
-                      ),
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(bottom: 130),
-                          child: SvgPicture.asset(
-                            'assets/circle.svg',
-                            width: 40.0,
-                            height: 40.0,
-                            color: primaryBackground,
-                          ),
-                        ),
-                        SvgPicture.asset(
-                          'assets/circle.svg',
-                          width: 20.0,
-                          height: 20.0,
-                          color: primaryBackground,
-                        ),
-                        SvgPicture.asset(
-                          'assets/circle.svg',
-                          width: 20.0,
-                          height: 20.0,
-                          color: primaryBackground,
-                        ),
-                      ],
-                    ),
-                    Container(
-                      width: 170,
-                      height: 210,
-                      child: ReorderableListView.builder(
-                        physics: NeverScrollableScrollPhysics(),
-                        scrollDirection: Axis.vertical,
-                        shrinkWrap: true,
-                        itemCount: exerciseController.exerciseList.length,
-                        itemBuilder: (context, index) {
-                          final items = exerciseController.exerciseList[index];
-                          return Card(
-                              key: ValueKey(items['id']),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              elevation: 4,
-                              child: ListTile(
-                                key: ValueKey(items['id']),
-                                title: Text(
-                                  items['texto'].toString(),
-                                  textAlign: TextAlign.center,
-                                ),
-                                contentPadding: EdgeInsets.symmetric(
-                                    vertical: 2, horizontal: 16),
-                              ));
-                        },
-                        onReorder: (oldIndex, newIndex) {
-                          setState(() {
-                            if (newIndex > oldIndex) {
-                              newIndex -= 1;
-                            }
-                            final item = exerciseController.exerciseList.removeAt(oldIndex);
-                            exerciseController.exerciseList.insert(newIndex, item);
-                          });
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  
-                  width: 320,
-                  height: 50,
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                          Color.fromARGB(255, 115, 225,
-                              119)), // Set the background color to green
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(
-                              7), // Adjust the corner radius as desired
-                        ),
-                      ),
-                    ),
-                    onPressed: () {
-debugPrint(exerciseController.exerciseList.toString());},
-                    child: const Text(
-                      "Check",
-                      style: TextStyle(fontWeight: FontWeight.w800),
+                              contentPadding: EdgeInsets.symmetric(
+                                  vertical: 2, horizontal: 16),
+                            ));
+                      },
                     ),
                   ),
-                ) 
-
-              ],
-            )),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 130),
+                        child: SvgPicture.asset(
+                          'assets/circle.svg',
+                          width: 40.0,
+                          height: 40.0,
+                          color: primaryBackground,
+                        ),
+                      ),
+                      SvgPicture.asset(
+                        'assets/circle.svg',
+                        width: 20.0,
+                        height: 20.0,
+                        color: primaryBackground,
+                      ),
+                      SvgPicture.asset(
+                        'assets/circle.svg',
+                        width: 20.0,
+                        height: 20.0,
+                        color: primaryBackground,
+                      ),
+                    ],
+                  ),
+                  Container(
+                    width: 170,
+                    height: 210,
+                    child: ReorderableListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      itemCount: listaSimulada2.length,
+                      itemBuilder: (context, index) {
+                        final items = listaSimulada2[index];
+                        return Card(
+                            key: ValueKey(items['id']),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            elevation: 4,
+                            child: ListTile(
+                              key: ValueKey(items['id']),
+                              title: Text(
+                                items['texto'].toString(),
+                                textAlign: TextAlign.center,
+                              ),
+                              contentPadding: EdgeInsets.symmetric(
+                                  vertical: 2, horizontal: 16),
+                            ));
+                      },
+                      onReorder: (oldIndex, newIndex) {
+                        setState(() {
+                          if (newIndex > oldIndex) {
+                            newIndex -= 1;
+                          }
+                          final item = listaSimulada2
+                              .removeAt(oldIndex);
+                            listaSimulada2
+                              .insert(newIndex, item);
+                        });
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                width: 320,
+                height: 50,
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                        Color.fromARGB(255, 115, 225,
+                            119)), // Set the background color to green
+                    shape:
+                        MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(
+                            7), // Adjust the corner radius as desired
+                      ),
+                    ),
+                  ),
+                  onPressed: () {
+                    debugPrint(
+                        exerciseController.exerciseList.toString());
+                  },
+                  child: const Text(
+                    "Check",
+                    style: TextStyle(fontWeight: FontWeight.w800),
+                  ),
+                ),
+              )
+                ],
+              ),
+            ));
+      } else {
+        return Container(
+          child: Text(
+            "Hola",
+            style: TextStyle(color: Colors.white),
           ),
-        ));
-      }else{
-        return Container(child: Text("Hola", style: TextStyle(color: Colors.white),),);
+        );
       }
-
-    }
-
-    );}
+    });
   }
-
+}
