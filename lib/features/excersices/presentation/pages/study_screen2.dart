@@ -83,6 +83,19 @@ class _Study_Screen2State extends State<Study_Screen2> {
       listaSimulada.insert(newindex, items);
     });
   }
+  bool checkIdsAreSame() {
+  if (listaSimulada.length != listaSimulada2.length) {
+    return false; // Las listas no tienen la misma cantidad de elementos, por lo tanto, no son iguales
+  }
+
+  for (int i = 0; i < listaSimulada.length; i++) {
+    if (listaSimulada[i]['id'] != listaSimulada2[i]['id']) {
+      return false; // Las IDs no son iguales en la misma posición
+    }
+  }
+
+  return true; // Todos los IDs son iguales
+}
 
   @override
   Widget build(BuildContext context) {
@@ -252,8 +265,11 @@ class _Study_Screen2State extends State<Study_Screen2> {
                     ),
                   ),
                   onPressed: () {
-                    debugPrint(
-                        exerciseController.exerciseList.toString());
+                      if (checkIdsAreSame()) {
+    debugPrint('Correcto');
+  } else {
+    debugPrint('Incorecto');
+  }
                   },
                   child: const Text(
                     "Check",
