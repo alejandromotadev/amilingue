@@ -6,10 +6,10 @@ import 'package:dio/dio.dart';
 class ExerciseRemoteDataSourceImpl implements ExerciseRemoteDataSource {
 
   @override
-  Future<List> getExercise() async {
+  Future<List> getExercise(id) async {
     final dio = Dio();
     final response =
-        await dio.get('https://exercise.stevenpadilla.dev/api/v1/exercise');
+        await dio.get('https://exercise.stevenpadilla.dev/api/v1/exercise/$id');
     if (response.statusCode == 200) {
       return response.data;
     } else {

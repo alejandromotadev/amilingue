@@ -6,7 +6,7 @@ class GetExerciseUseCase {
 
   GetExerciseUseCase({required this.repository});
 
-  Future<List> call() {
-    return repository.getExercise();
+  Future<List> call(id) {
+    return repository.getExercise(id);
   }
 }

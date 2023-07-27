@@ -146,11 +146,12 @@ class _HomeViewState extends State<HomeView> {
                   height: 190, enlargeCenterPage: true, disableCenter: true),
               //courseController.courseList.map
               items: courseController.courseList.map((course) {
-
                 return Builder(
                   builder: (BuildContext context) {
                     return InkWell(
-                      onTap: () {
+                      onTap: () async {
+                        SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+                        sharedPreferences.setInt("id_course", course["id"]);
                         Navigator.push(
                             context,
                             MaterialPageRoute(

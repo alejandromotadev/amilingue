@@ -2,6 +2,6 @@
 
 abstract class ExerciseRemoteDataSource {
 
-  Future<List> getExercise();
+  Future<List> getExercise(id);
 
 }

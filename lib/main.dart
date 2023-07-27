@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var id;
     return MultiRepositoryProvider(
         providers: buildRepositories(),
         child: MultiBlocProvider(

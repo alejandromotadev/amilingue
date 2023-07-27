@@ -10,7 +10,7 @@ class ExerciseRepositoryImpl implements ExerciseRepository {
 
 
   @override
-  Future<List> getExercise() => exerciseRemoteDataSource.getExercise();
+  Future<List> getExercise(id) => exerciseRemoteDataSource.getExercise(id);
 
 
 }
