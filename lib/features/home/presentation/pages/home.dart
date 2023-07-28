@@ -86,7 +86,7 @@ class _HomeViewState extends State<HomeView> {
                 style: TextStyle(
                   fontSize: 18,
 
-                  color: primaryTextColor,
+                  color: state ? darkmodeSecondarycolor : primaryTextColor,
 
                 ),
               ),
