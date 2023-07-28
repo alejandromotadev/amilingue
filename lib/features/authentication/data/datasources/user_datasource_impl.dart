@@ -45,9 +45,9 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
     try {
       response = await dio.post(api, data: data);
       final body = await response.data;
-      await sharedPreferences.setString("user", jsonEncode(body));
-      await sharedPreferences.setString("email", jsonEncode(body));
-      if (body[1]["true"] == true) {
+      await sharedPreferences.setString("user", jsonEncode(body[0]["name"]));
+      await sharedPreferences.setString("email", jsonEncode(body[0]["email"]));
+      if (body[1] == true) {
         return true;
       } else {
         return false;
