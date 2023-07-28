@@ -94,7 +94,7 @@ class _HomeViewState extends State<HomeView> {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            getCategories(),
+           // getCategories(),
             const SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.fromLTRB(15, 0, 15, 10),
@@ -143,7 +143,7 @@ class _HomeViewState extends State<HomeView> {
           final courseController = context.read<CourseCubit>();
           return CarouselSlider(
               options: CarouselOptions(
-                  height: 190, enlargeCenterPage: true, disableCenter: true),
+                  height: 260, enlargeCenterPage: true, disableCenter: true),
               //courseController.courseList.map
               items: courseController.courseList.map((course) {
                 return Builder(
@@ -182,6 +182,8 @@ class _HomeViewState extends State<HomeView> {
                                     borderRadius: BorderRadius.circular(15)),
                               ),
                             ),
+
+
                             Positioned(
                               top: 10,
                               left: 10,
@@ -213,8 +215,20 @@ class _HomeViewState extends State<HomeView> {
                                 ),
                               ),
                             ),
+                            Center(
+                              child: Text(
+                                course["description"],
+                                maxLines: 3,
+                                textAlign: TextAlign.center,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  color: state
+                                      ? darkmodeSecondarycolor
+                                      : primaryTextColor, ),
+                              ),
+                            ),
                             Positioned(
-                              top: 130,
+                              top: 200,
                               left: 10,
                               child: Row(
                                 children: [
@@ -233,15 +247,7 @@ class _HomeViewState extends State<HomeView> {
                                         fontWeight: FontWeight.w600),
                                   ),
                                   const SizedBox(width: 10),
-                                  Text(
-                                    course["description"],
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                        color: state
-                                            ? darkmodeSecondarycolor
-                                            : primaryTextColor),
-                                  ),
+
                                 ],
                               ),
                             ),

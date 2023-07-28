@@ -16,6 +16,7 @@ class CategoryBox extends StatelessWidget {
         return Column(
           children: [
             Container(
+
               padding: const EdgeInsets.all(5),
               decoration: BoxDecoration(
                   color: state ? darkmodebutton : buttonColor,

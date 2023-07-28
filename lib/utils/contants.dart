@@ -24,7 +24,7 @@ const checkColor = Color(0xffA8FFBB);
 
 const darkmodebutton = Color(0xff906cf3);
 const darkmodeTextColor = Color(0xffFFFFFF);
-const darkmodeprimarycolor = Color(0xff000000);
+const darkmodeprimarycolor = Color(0xff050228);
 const darkmodeSecondarycolor = Color(0xffFFFFFF);
 
 class ButtonConstant extends StatelessWidget {

@@ -1,6 +1,6 @@
 import 'package:amilingue/Widgets/Navigation/cubit/navigation_cubit.dart';
-import 'package:amilingue/features/course_home/presentation/pages/home.dart';
 import 'package:amilingue/features/course_user/presentation/pages/user_courses_page.dart';
+import 'package:amilingue/features/home/presentation/pages/home.dart';
 import 'package:amilingue/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:amilingue/features/profile/presentation/page/profile_view.dart';
 import 'package:amilingue/utils/contants.dart';
