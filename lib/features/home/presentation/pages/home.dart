@@ -54,33 +54,15 @@ class _HomeViewState extends State<HomeView> {
     return AppBar(
       automaticallyImplyLeading: false,
       forceMaterialTransparency: true,
-      elevation: 0,
       title: BlocBuilder<AppThemeCubit, bool>(builder: (context, state) {
         return Row(
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  user ?? "placeholder Name",
-                  style: const TextStyle(
-                    color: secondaryBackground,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                Text(
-                  "Welcome!",
-                  style: TextStyle(
-                    color: state ? darkmodeTextColor : primaryTextColor,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ],
+            Text("Hello  $user",
+              style: const TextStyle(
+                color: secondaryBackground,
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
+              ),
             )
           ],
         );
@@ -94,8 +76,24 @@ class _HomeViewState extends State<HomeView> {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-           // getCategories(),
+            // getCategories(),
             const SizedBox(height: 20),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+              child: Text(
+                "Welcome to AMILINGÜE, we are glad to have you here with us :)",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 18,
+
+                  color: primaryTextColor,
+
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
             Padding(
               padding: const EdgeInsets.fromLTRB(15, 0, 15, 10),
               child: Text(
@@ -107,6 +105,7 @@ class _HomeViewState extends State<HomeView> {
                 ),
               ),
             ),
+
             const SizedBox(
               height: 10,
             ),
@@ -138,25 +137,30 @@ class _HomeViewState extends State<HomeView> {
   Widget getCourses() {
     return BlocBuilder<CourseCubit, CourseState>(builder: (context, state) {
       if (state is Loaded) {
-        
         return BlocBuilder<AppThemeCubit, bool>(builder: (context, state) {
           final courseController = context.read<CourseCubit>();
           return CarouselSlider(
               options: CarouselOptions(
-                  height: 230, enlargeCenterPage: true, disableCenter: true),
+                height: 230,
+                enlargeCenterPage: true,
+                disableCenter: true,
+                autoPlay: true,
+              ),
               //courseController.courseList.map
               items: courseController.courseList.map((course) {
                 return Builder(
                   builder: (BuildContext context) {
                     return InkWell(
                       onTap: () async {
-                        SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+                        SharedPreferences sharedPreferences =
+                            await SharedPreferences.getInstance();
                         sharedPreferences.setInt("id_course", course["id"]);
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                    CourseViewScreen(course: course,)));
+                                builder: (context) => CourseViewScreen(
+                                      course: course,
+                                    )));
                       },
                       child: Container(
                         width: 280,
@@ -182,8 +186,6 @@ class _HomeViewState extends State<HomeView> {
                                     borderRadius: BorderRadius.circular(15)),
                               ),
                             ),
-
-
                             Positioned(
                               top: 10,
                               left: 10,
@@ -224,7 +226,8 @@ class _HomeViewState extends State<HomeView> {
                                 style: TextStyle(
                                   color: state
                                       ? darkmodeSecondarycolor
-                                      : primaryTextColor, ),
+                                      : primaryTextColor,
+                                ),
                               ),
                             ),
                             Positioned(
@@ -247,7 +250,6 @@ class _HomeViewState extends State<HomeView> {
                                         fontWeight: FontWeight.w600),
                                   ),
                                   const SizedBox(width: 10),
-
                                 ],
                               ),
                             ),
@@ -259,7 +261,9 @@ class _HomeViewState extends State<HomeView> {
                 );
               }).toList());
         });
-      }else{return Container();}
+      } else {
+        return Container();
+      }
     });
   }
 }
