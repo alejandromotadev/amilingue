@@ -143,7 +143,7 @@ class _HomeViewState extends State<HomeView> {
           final courseController = context.read<CourseCubit>();
           return CarouselSlider(
               options: CarouselOptions(
-                  height: 260, enlargeCenterPage: true, disableCenter: true),
+                  height: 230, enlargeCenterPage: true, disableCenter: true),
               //courseController.courseList.map
               items: courseController.courseList.map((course) {
                 return Builder(
@@ -228,7 +228,7 @@ class _HomeViewState extends State<HomeView> {
                               ),
                             ),
                             Positioned(
-                              top: 200,
+                              top: 160,
                               left: 10,
                               child: Row(
                                 children: [

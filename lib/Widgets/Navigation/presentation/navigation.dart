@@ -16,7 +16,7 @@ class NavigationPage extends StatelessWidget {
     //TODO: AGREGAR MAS VISTAS
     final screens = [
       const HomeView(),
-      const CoursesView(),
+      //const CoursesView(),
       const ProfileView()
     ];
 
@@ -38,11 +38,11 @@ class NavigationPage extends StatelessWidget {
                     label: "",
                     activeIcon: Icon(Icons.home, color: secondaryBackground,),
                   ),
-                  BottomNavigationBarItem(
+       /*           BottomNavigationBarItem(
                     icon: Icon(Icons.task, color: primaryTextColor,),
                     label: "",
                     activeIcon: Icon(Icons.task, color: secondaryBackground,),
-                  ),
+                  ),*/
                   BottomNavigationBarItem(
                     icon: Icon(Icons.person, color: primaryTextColor,),
                     label: "",
